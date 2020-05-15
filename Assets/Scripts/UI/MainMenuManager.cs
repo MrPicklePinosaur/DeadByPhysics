@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MainMenuManager : MonoBehaviour {
 
+    public List<GameObject> frames;
+
     public void OnJoinGameButtonClicked() {
 
     }
