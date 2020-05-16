@@ -29,6 +29,7 @@ public class RoomUI : MonoBehaviour {
     }
 
     private void Update() {
+
         //VERY, VERY, VERY BAD FOR NOW
         if (roomManager.currentRoom != null ) {
             roomNameText.text = roomManager.currentRoom?.Name;
