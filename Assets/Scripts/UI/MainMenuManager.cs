@@ -1,14 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static MatchMaking;
 
 public class MainMenuManager : MonoBehaviour {
 
-    public List<GameObject> frames;
+    public GameObject currentFrame;
 
-    public void OnJoinGameButtonClicked() {
-        matchMaking.JoinRoom("");
+
+    public void SwitchFrame(GameObject frame) {
+
+        if (currentFrame != null) {
+            currentFrame.SetActive(false);
+        }
+
+        frame.SetActive(true);
+        currentFrame = frame;
     }
+
+
 
 }

@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TabButton : MonoBehaviour {
+public class EventSystem : MonoBehaviour {
 
-    TabGroup tabGroup;
-
-    private void Start() {
+    void Start() {
         
     }
 
+    void Update() {
+        
+    }
 }
