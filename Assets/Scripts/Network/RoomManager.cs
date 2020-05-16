@@ -7,17 +7,16 @@ using ExitGames.Client.Photon;
 
 using static EventSystem;
 
-public class RoomManager : MonoBehaviourPunCallbacks {
+public class RoomManager : EventListener {
 
     public static RoomManager roomManager;
     public Room currentRoom;
     public bool isReady = false;
 
     private void Start() {
-        RoomManager.roomManager = this;
+        base.Start();
 
-        PhotonNetwork.NetworkingClient.EventReceived += OnEvent;
-        eventSystem.EventReceived += OnEvent;
+        RoomManager.roomManager = this;
     }
 
     public void CreateNewRoom(string roomName) {
@@ -49,7 +48,6 @@ public class RoomManager : MonoBehaviourPunCallbacks {
     }
 
     public void LeaveRoom() {
-        eventSystem.RaiseNetworkEvent(EventCodes.TESTEVENT);
         PhotonNetwork.LeaveRoom();
     }
 
@@ -57,17 +55,12 @@ public class RoomManager : MonoBehaviourPunCallbacks {
         this.isReady = ready;
     }
 
-    //handle events here
-    public void OnEvent(EventData evt) {
-        byte code = evt.Code;
-
-        if (evt.Code == 1) {
-            Debug.Log($"RECIEVED EVENT!!!!!!!!!!!!!!!!!!!!! with code {evt}");
-        }
+    public override void OnEvent(EventData data) {
         
     }
 
-    
+
+
     //bunch of event handles
     public override void OnCreatedRoom() {
         Debug.Log("Successfully created room");
