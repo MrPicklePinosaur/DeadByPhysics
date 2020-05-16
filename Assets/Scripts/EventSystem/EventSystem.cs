@@ -1,14 +1,18 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EventSystem : MonoBehaviour {
 
-    void Start() {
-        
+    public static EventSystem eventSystem;
+
+    private void Awake() {
+        EventSystem.eventSystem = this;
     }
 
-    void Update() {
-        
+    public event Action<string> onCreateRoomEvent;
+    public void CreateRoomEvent(string name) {
+        onCreateRoomEvent?.Invoke(name);
     }
 }

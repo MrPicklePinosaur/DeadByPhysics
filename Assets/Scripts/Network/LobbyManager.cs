@@ -31,8 +31,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks {
     public override void OnJoinedLobby() {
 
         Debug.Log("Successfully joined lobby");
-
-        //ui stuff
     }
 
 }
