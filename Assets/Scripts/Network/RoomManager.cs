@@ -9,6 +9,7 @@ using static EventSystem;
 public class RoomManager : MonoBehaviourPunCallbacks {
 
     public static RoomManager roomManager;
+    public Room currentRoom;
 
     private void Start() {
         RoomManager.roomManager = this;
@@ -25,11 +26,24 @@ public class RoomManager : MonoBehaviourPunCallbacks {
         }, TypedLobby.Default);
 
     }
+
+    public void StartGame() {
+
+        if (PhotonNetwork.IsMasterClient) {
+            
+            //load into new scene
+
+
+        }
+
+    }
+
     public void JoinRoom(string roomName) {
         PhotonNetwork.JoinRoom(roomName);
     }
 
     public override void OnJoinedRoom() {
+        currentRoom = PhotonNetwork.CurrentRoom;
         Debug.Log("Successfully joined room");
     }
     public override void OnJoinRoomFailed(short returnCode, string message) {

@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Daniel/MainMenu.unity
+    guid: 3ddd0b633c164684ba5a173bc6b07b70
   m_configObjects: {}
