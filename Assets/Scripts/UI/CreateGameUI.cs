@@ -4,7 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-using static EventSystem;
+using static RoomManager;
+
 
 public class CreateGameUI : MonoBehaviour {
 
@@ -17,8 +18,9 @@ public class CreateGameUI : MonoBehaviour {
         createNewGameButton = GetComponentInChildren<Button>();
 
         createNewGameButton.onClick.AddListener(delegate {
-            eventSystem.CreateRoomEvent(newGameNameField.text); //possibly add some sort of room validity check
+            roomManager.CreateNewRoom(newGameNameField.text);
         });
+
     }
 
 }

@@ -11,8 +11,5 @@ public class EventSystem : MonoBehaviour {
         EventSystem.eventSystem = this;
     }
 
-    public event Action<string> onCreateRoomEvent;
-    public void CreateRoomEvent(string name) {
-        onCreateRoomEvent?.Invoke(name);
-    }
+
 }

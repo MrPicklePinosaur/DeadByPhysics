@@ -6,7 +6,6 @@ public class MainMenuManager : MonoBehaviour {
 
     public GameObject currentFrame;
 
-
     public void SwitchFrame(GameObject frame) {
 
         if (currentFrame != null) {

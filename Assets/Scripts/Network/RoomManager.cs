@@ -4,9 +4,19 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
+using static EventSystem;
+
 public class RoomManager : MonoBehaviourPunCallbacks {
 
+    public static RoomManager roomManager;
+
+    private void Start() {
+        RoomManager.roomManager = this;
+    }
+
     public void CreateNewRoom(string roomName) {
+
+        Debug.Log($"Attempting to create room of name <{roomName}>");
 
         PhotonNetwork.CreateRoom(roomName, new RoomOptions() {
             IsVisible = true,
@@ -15,7 +25,6 @@ public class RoomManager : MonoBehaviourPunCallbacks {
         }, TypedLobby.Default);
 
     }
-
     public void JoinRoom(string roomName) {
         PhotonNetwork.JoinRoom(roomName);
     }
