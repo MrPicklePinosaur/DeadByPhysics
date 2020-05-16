@@ -6,25 +6,26 @@ using UnityEngine.UI;
 
 using static RoomManager;
 
-
 public class RoomUI : MonoBehaviour {
 
     TMP_Text roomNameText;
     VerticalLayoutGroup connectedPlayers;
-    Button readyButton;
+    Toggle readyToggle;
+    Button leaveButton;
 
     private void Start() {
         roomNameText = GetComponentInChildren<TMP_Text>();
         connectedPlayers = GetComponentInChildren<VerticalLayoutGroup>();
-        readyButton = GetComponentInChildren<Button>();
-
-
+        readyToggle = GetComponentInChildren<Toggle>();
+        leaveButton = GetComponentInChildren<Button>();
 
         //NOTE: in the future, make it so all players must be ready before we start game
-        readyButton.onClick.AddListener(delegate {
-            roomManager.StartGame();
+        readyToggle.onValueChanged.AddListener(delegate {
+            roomManager.SetReady(readyToggle.isOn);
         });
-
+        leaveButton.onClick.AddListener(delegate {
+            roomManager.LeaveRoom();
+        });
 
     }
 

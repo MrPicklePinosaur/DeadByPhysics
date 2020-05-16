@@ -10,6 +10,7 @@ public class RoomManager : MonoBehaviourPunCallbacks {
 
     public static RoomManager roomManager;
     public Room currentRoom;
+    public bool isReady = false;
 
     private void Start() {
         RoomManager.roomManager = this;
@@ -37,26 +38,48 @@ public class RoomManager : MonoBehaviourPunCallbacks {
             PhotonNetwork.LoadLevel(1);
 
         }
-
     }
 
     public void JoinRoom(string roomName) {
         PhotonNetwork.JoinRoom(roomName);
     }
 
-    public override void OnJoinedRoom() {
-        currentRoom = PhotonNetwork.CurrentRoom;
-        Debug.Log("Successfully joined room");
-    }
-    public override void OnJoinRoomFailed(short returnCode, string message) {
-        Debug.LogError("FAILED TO JOIN ROOM");
+    public void LeaveRoom() {
+        PhotonNetwork.LeaveRoom();
     }
 
+    public void SetReady(bool ready) {
+        this.isReady = ready;
+    }
+
+    //bunch of event handles
     public override void OnCreatedRoom() {
         Debug.Log("Successfully created room");
     }
     public override void OnCreateRoomFailed(short returnCode, string message) {
         Debug.LogError("FAILED TO CREATE ROOM");
     }
+
+    public override void OnJoinedRoom() {
+        currentRoom = PhotonNetwork.CurrentRoom;
+        Debug.Log("You successfully joined room");
+    }
+    public override void OnPlayerEnteredRoom(Player newPlayer) {
+        Debug.Log($"{newPlayer.NickName} successfully joined room");
+    }
+    public override void OnJoinRoomFailed(short returnCode, string message) {
+        Debug.LogError("FAILED TO JOIN ROOM");
+    }
+
+    public override void OnLeftRoom() {
+        currentRoom = null;
+        Debug.Log("You left room");
+    }
+    public override void OnPlayerLeftRoom(Player otherPlayer) {
+        Debug.Log($"{otherPlayer.NickName} left room");
+    }
+
+
+    public bool isMasterClient() { return PhotonNetwork.IsMasterClient; }
 
 }
