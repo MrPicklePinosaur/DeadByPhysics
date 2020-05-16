@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class MainMenuManager : MonoBehaviour {
 
-    public List<GameObject> frames;
+    public GameObject currentFrame;
 
-    public void OnJoinGameButtonClicked() {
+    public void SwitchFrame(GameObject frame) {
 
+        if (currentFrame != null) {
+            currentFrame.SetActive(false);
+        }
+
+        frame.SetActive(true);
+        currentFrame = frame;
     }
+
 
 }
