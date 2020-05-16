@@ -5,6 +5,8 @@ using Photon.Pun;
 using Photon.Realtime;
 using static PlayerProfile;
 
+using static EventSystem;
+
 public class LobbyManager : MonoBehaviourPunCallbacks {
 
     void Start() {
@@ -16,6 +18,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks {
 
         }
         */
+        
     }
 
     public override void OnConnectedToMaster() {
