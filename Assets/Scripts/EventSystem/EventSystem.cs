@@ -18,34 +18,33 @@ public class EventSystem : MonoBehaviour {
 
     public enum EventCodes {
         //Client events 
-        
+        TESTEVENT = 1
 
 
         //Network events
 
 
+
+        //Photon codes: 200-255
+
     }
 
-    public event Func<byte, object[], EventData> EventRecieved;
+    //public event Func<byte, EventData> EventReceived = code => new EventData() { Code = code };
+    public event Action<EventData> EventReceived;
 
-    public void RaiseClientEvent(byte eventCode) {
-        RaiseClientEvent(eventCode, new object[] { });
-    }
-    public void RaiseClientEvent(byte eventCode, object[] context) {
-        EventRecieved?.Invoke(eventCode,context);
+    public void RaiseClientEvent(EventCodes eventCode) {
+        EventReceived?.Invoke(new EventData() { Code = (byte)eventCode });
     }
 
-    public void RaiseNetworkEvent(byte eventCode) {
-        RaiseNetworkEvent(eventCode, new object[] { });
-    }
-    public void RaiseNetworkEvent(byte eventCode, object[] context) {
+    public void RaiseNetworkEvent(EventCodes eventCode) {
         RaiseEventOptions eventOpt = new RaiseEventOptions() { Receivers = ReceiverGroup.All };
         SendOptions sendOpt = new SendOptions() { Reliability = true };
-        PhotonNetwork.RaiseEvent(eventCode, context, eventOpt, sendOpt);
+        PhotonNetwork.RaiseEvent((byte)eventCode, new object[] { }, eventOpt, sendOpt);
     }
 
 
     //PhotonNetwork.NetworkingClient.EventRecievend += OnEvent
+    //eventSystem.EventRecieved += OnEvent
 
 
 

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using ExitGames.Client.Photon;
+
+using static EventSystem;
 
 public class RoomManager : MonoBehaviourPunCallbacks {
 
@@ -12,6 +15,9 @@ public class RoomManager : MonoBehaviourPunCallbacks {
 
     private void Start() {
         RoomManager.roomManager = this;
+
+        PhotonNetwork.NetworkingClient.EventReceived += OnEvent;
+        eventSystem.EventReceived += OnEvent;
     }
 
     public void CreateNewRoom(string roomName) {
@@ -43,6 +49,7 @@ public class RoomManager : MonoBehaviourPunCallbacks {
     }
 
     public void LeaveRoom() {
+        eventSystem.RaiseNetworkEvent(EventCodes.TESTEVENT);
         PhotonNetwork.LeaveRoom();
     }
 
@@ -50,6 +57,17 @@ public class RoomManager : MonoBehaviourPunCallbacks {
         this.isReady = ready;
     }
 
+    //handle events here
+    public void OnEvent(EventData evt) {
+        byte code = evt.Code;
+
+        if (evt.Code == 1) {
+            Debug.Log($"RECIEVED EVENT!!!!!!!!!!!!!!!!!!!!! with code {evt}");
+        }
+        
+    }
+
+    
     //bunch of event handles
     public override void OnCreatedRoom() {
         Debug.Log("Successfully created room");
