@@ -1,11 +1,13 @@
-﻿using Photon.Pun;
+﻿using ExitGames.Client.Photon;
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+using static EventSystem;
 using static RoomManager;
+using static MainMenuManager;
 
 public class CreateGameUI : MonoBehaviour {
 
@@ -22,5 +24,6 @@ public class CreateGameUI : MonoBehaviour {
         });
 
     }
+
 
 }

@@ -5,6 +5,9 @@ using TMPro;
 using UnityEngine.UI;
 
 using static RoomManager;
+using ExitGames.Client.Photon;
+using static EventSystem;
+using static MainMenuManager;
 
 public class RoomUI : MonoBehaviour {
 
@@ -14,6 +17,7 @@ public class RoomUI : MonoBehaviour {
     Button leaveButton;
 
     private void Start() {
+
         roomNameText = GetComponentInChildren<TMP_Text>();
         connectedPlayers = GetComponentInChildren<VerticalLayoutGroup>();
         readyToggle = GetComponentInChildren<Toggle>();
