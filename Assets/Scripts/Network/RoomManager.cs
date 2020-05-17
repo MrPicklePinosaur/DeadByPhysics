@@ -58,8 +58,16 @@ public class RoomManager : EventListener {
     public override void OnEvent(EventData data) {
         
         switch(data.Code) {
+            case (byte)EventCodes.OnCreatedRoomEvent:
+                Debug.Log("Successfully Created Room");
+                break;
             case (byte)EventCodes.OnJoinedRoomEvent:
-
+                currentRoom = PhotonNetwork.CurrentRoom;
+                Debug.Log("Successfully Joined Room");
+                break;
+            case (byte)EventCodes.OnLeftRoomEvent:
+                currentRoom = null;
+                Debug.Log("Successfully Left Room");
                 break;
         }
 
