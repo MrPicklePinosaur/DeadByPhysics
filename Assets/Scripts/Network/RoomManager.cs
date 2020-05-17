@@ -57,10 +57,16 @@ public class RoomManager : EventListener {
 
     public override void OnEvent(EventData data) {
         
+        switch(data.Code) {
+            case (byte)EventCodes.OnJoinedRoomEvent:
+
+                break;
+        }
+
     }
 
 
-
+    /*
     //bunch of event handles
     public override void OnCreatedRoom() {
         Debug.Log("Successfully created room");
@@ -87,7 +93,7 @@ public class RoomManager : EventListener {
     public override void OnPlayerLeftRoom(Player otherPlayer) {
         Debug.Log($"{otherPlayer.NickName} left room");
     }
-
+    */
 
     public bool isMasterClient() { return PhotonNetwork.IsMasterClient; }
 

@@ -10,53 +10,37 @@ using static EventSystem;
 //catch pun callbacks and converts them into events
 public class PunCallbacksCatcher : MonoBehaviourPunCallbacks {
 
-    public virtual void OnConnected() {
-    }
+    public override void OnConnected() { }
 
-    public virtual void OnLeftRoom() {
-    }
+    public override void OnLeftRoom() { eventSystem.RaiseClientEvent(EventCodes.OnLeftRoomEvent); }
 
-    public virtual void OnMasterClientSwitched(Player newMasterClient) {
-    }
+    public override void OnMasterClientSwitched(Player newMasterClient) { }
 
-    public virtual void OnCreateRoomFailed(short returnCode, string message) {
-    }
+    public override void OnCreateRoomFailed(short returnCode, string message) { }
 
-    public virtual void OnJoinRoomFailed(short returnCode, string message) {
-    }
+    public override void OnJoinRoomFailed(short returnCode, string message) { }
 
-    public virtual void OnCreatedRoom() {
-    }
+    public override void OnCreatedRoom() { eventSystem.RaiseClientEvent(EventCodes.OnCreatedRoomEvent); }
 
-    public virtual void OnJoinedLobby() {
-    }
+    public override void OnJoinedLobby() { }
 
-    public virtual void OnLeftLobby() {
-    }
+    public override void OnLeftLobby() { }
 
-    public virtual void OnDisconnected(DisconnectCause cause) {
-    }
+    public override void OnDisconnected(DisconnectCause cause) { }
 
-    public virtual void OnRegionListReceived(RegionHandler regionHandler) {
-    }
+    public override void OnRegionListReceived(RegionHandler regionHandler) { }
 
-    public virtual void OnRoomListUpdate(List<RoomInfo> roomList) {
-    }
+    public override void OnRoomListUpdate(List<RoomInfo> roomList) { }
 
-    public virtual void OnJoinedRoom() {
-    }
+    public override void OnJoinedRoom() { eventSystem.RaiseClientEvent(EventCodes.OnJoinedRoomEvent); }
 
-    public virtual void OnPlayerEnteredRoom(Player newPlayer) {
-    }
+    public override void OnPlayerEnteredRoom(Player newPlayer) { }
 
-    public virtual void OnPlayerLeftRoom(Player otherPlayer) {
-    }
+    public override void OnPlayerLeftRoom(Player otherPlayer) { }
 
-    public virtual void OnJoinRandomFailed(short returnCode, string message) {
-    }
+    public override void OnJoinRandomFailed(short returnCode, string message) { }
 
-    public virtual void OnConnectedToMaster() {
-    }
+    public override void OnConnectedToMaster() { }
 
     /*
     public virtual void OnRoomPropertiesUpdate(Hashtable propertiesThatChanged) {
