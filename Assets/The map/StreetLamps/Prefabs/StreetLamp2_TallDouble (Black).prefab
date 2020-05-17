@@ -108,6 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8813878695017701126}
   - component: {fileID: 8813878695017701125}
+  - component: {fileID: 2984526435043487061}
   m_Layer: 0
   m_Name: Spot Light2
   m_TagString: Untagged
@@ -190,6 +191,20 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &2984526435043487061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8813878695017701127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e83d6e3747ddb7f478225e4f46e91208, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lt: {fileID: 0}
+  counter: 0
 --- !u!1 &8813878695163426626
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,7 +249,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 0.972549, b: 0.8117647, a: 1}
   m_Intensity: 1
-  m_Range: 3
+  m_Range: 0.3
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -292,6 +307,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8813878695764855396}
   - component: {fileID: 8813878695764855419}
+  - component: {fileID: 8457942326717469558}
   m_Layer: 0
   m_Name: Spot Light
   m_TagString: Untagged
@@ -374,6 +390,20 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &8457942326717469558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8813878695764855397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e83d6e3747ddb7f478225e4f46e91208, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lt: {fileID: 0}
+  counter: 0
 --- !u!1 &8813878696259203351
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,7 +448,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 0.972549, b: 0.8117647, a: 1}
   m_Intensity: 1
-  m_Range: 3
+  m_Range: 0.3
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
