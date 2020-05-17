@@ -1276,6 +1276,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentFrame: {fileID: 1062262255}
+  StartGameFrame: {fileID: 1062262255}
+  RoomFrame: {fileID: 1578029814}
 --- !u!1 &637443164
 GameObject:
   m_ObjectHideFlags: 0
@@ -5155,7 +5157,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1895707842}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 552919042}
+        m_MethodName: SwitchFrame
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1062262255}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1895707842
 MonoBehaviour:
   m_ObjectHideFlags: 0

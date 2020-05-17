@@ -49,6 +49,8 @@ public class RoomManager : EventListener {
 
     public void LeaveRoom() {
         PhotonNetwork.LeaveRoom();
+
+        Debug.Log("trying to leave room");
     }
 
     public void SetReady(bool ready) {
@@ -56,18 +58,11 @@ public class RoomManager : EventListener {
     }
 
     public override void OnEvent(EventData data) {
-        
+
         switch(data.Code) {
-            case (byte)EventCodes.OnCreatedRoomEvent:
-                Debug.Log("Successfully Created Room");
-                break;
-            case (byte)EventCodes.OnJoinedRoomEvent:
+            case (byte)EventCodes.JoinEvent:
                 currentRoom = PhotonNetwork.CurrentRoom;
                 Debug.Log("Successfully Joined Room");
-                break;
-            case (byte)EventCodes.OnLeftRoomEvent:
-                currentRoom = null;
-                Debug.Log("Successfully Left Room");
                 break;
         }
 
@@ -93,6 +88,7 @@ public class RoomManager : EventListener {
     public override void OnJoinRoomFailed(short returnCode, string message) {
         Debug.LogError("FAILED TO JOIN ROOM");
     }
+    
 
     public override void OnLeftRoom() {
         currentRoom = null;
@@ -102,6 +98,7 @@ public class RoomManager : EventListener {
         Debug.Log($"{otherPlayer.NickName} left room");
     }
     */
+    
 
     public bool isMasterClient() { return PhotonNetwork.IsMasterClient; }
 

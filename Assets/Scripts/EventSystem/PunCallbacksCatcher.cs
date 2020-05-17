@@ -12,7 +12,9 @@ public class PunCallbacksCatcher : MonoBehaviourPunCallbacks {
 
     public override void OnConnected() { }
 
-    public override void OnLeftRoom() { eventSystem.RaiseClientEvent(EventCodes.OnLeftRoomEvent); }
+    public override void OnLeftRoom() {
+        Debug.Log("You left room");
+        eventSystem.RaiseClientEvent(EventCodes.OnLeftRoomEvent); }
 
     public override void OnMasterClientSwitched(Player newMasterClient) { }
 
@@ -24,7 +26,7 @@ public class PunCallbacksCatcher : MonoBehaviourPunCallbacks {
 
     public override void OnJoinedLobby() { }
 
-    public override void OnLeftLobby() { }
+    public override void OnLeftLobby() {  }
 
     public override void OnDisconnected(DisconnectCause cause) { }
 
@@ -36,7 +38,7 @@ public class PunCallbacksCatcher : MonoBehaviourPunCallbacks {
 
     public override void OnPlayerEnteredRoom(Player newPlayer) { }
 
-    public override void OnPlayerLeftRoom(Player otherPlayer) { }
+    public override void OnPlayerLeftRoom(Player otherPlayer) { Debug.Log("Someone left room"); }
 
     public override void OnJoinRandomFailed(short returnCode, string message) { }
 

@@ -34,11 +34,8 @@ public class MainMenuManager : EventListener {
     public override void OnEvent(EventData data) {
         
         switch (data.Code) {
-            case (byte)EventCodes.OnJoinedRoomEvent:
+            case (byte)EventCodes.JoinEvent:
                 SwitchFrame(RoomFrame);
-                break;
-            case (byte)EventCodes.OnLeftRoomEvent:
-                SwitchFrame(StartGameFrame);
                 break;
         }
 
