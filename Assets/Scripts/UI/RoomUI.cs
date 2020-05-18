@@ -8,24 +8,26 @@ using static RoomManager;
 using ExitGames.Client.Photon;
 using static EventSystem;
 using static MainMenuManager;
+using static PlayerProfile;
 
 public class RoomUI : MonoBehaviour {
 
+
+    //ui stuff
     TMP_Text roomNameText;
     VerticalLayoutGroup connectedPlayers;
-    Toggle readyToggle;
+    Button startButton;
     Button leaveButton;
 
     private void Start() {
 
         roomNameText = GetComponentInChildren<TMP_Text>();
         connectedPlayers = GetComponentInChildren<VerticalLayoutGroup>();
-        readyToggle = GetComponentInChildren<Toggle>();
-        leaveButton = GetComponentInChildren<Button>();
+        startButton = GetComponentsInChildren<Button>()[0];
+        leaveButton = GetComponentsInChildren<Button>()[1];
 
-        //NOTE: in the future, make it so all players must be ready before we start game
-        readyToggle.onValueChanged.AddListener(delegate {
-            roomManager.SetReady(readyToggle.isOn);
+        startButton.onClick.AddListener(delegate {
+            roomManager.StartGame();
         });
         leaveButton.onClick.AddListener(delegate {
             roomManager.LeaveRoom();
@@ -39,6 +41,12 @@ public class RoomUI : MonoBehaviour {
         if (roomManager.currentRoom != null ) {
             roomNameText.text = roomManager.currentRoom?.Name;
             DisplayConnectedPlayers();
+
+            //if there are 5 players in lobby, ungrey out the button
+            startButton.interactable = (roomManager.currentRoom.PlayerCount >= 1);
+
+            //if user is not master client, disable button
+            startButton.gameObject.SetActive(playerProfile.player.IsMasterClient);
         }
 
     }

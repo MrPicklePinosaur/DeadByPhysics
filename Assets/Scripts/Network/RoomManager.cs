@@ -6,6 +6,7 @@ using Photon.Realtime;
 using ExitGames.Client.Photon;
 
 using static EventSystem;
+using static PlayerProfile;
 
 public class RoomManager : EventListener {
 
@@ -54,19 +55,15 @@ public class RoomManager : EventListener {
 
     public void SetReady(bool ready) {
         this.isReady = ready;
-        eventSystem.RaiseNetworkEvent(EventCodes.OnTestEvent, new object[] { ready });
     }
 
     public override void OnEvent(EventData data) {
+        object[] payload = (object[])data.CustomData;
 
-        switch(data.Code) {
+        switch (data.Code) {
             case (byte)EventCodes.JoinEvent:
                 currentRoom = PhotonNetwork.CurrentRoom;
                 Debug.Log("Successfully Joined Room");
-                break;
-            case (byte)EventCodes.OnTestEvent:
-                object[] payload = (object[])data.CustomData;
-                Debug.Log(payload[0]);
                 break;
         }
 

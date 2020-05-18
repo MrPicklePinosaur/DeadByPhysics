@@ -40,8 +40,7 @@ public class EventSystem : MonoBehaviour {
 
 
         //Network events 100-199
-        OnTestEvent = 101,
-
+        OnChatMessage = 101,
 
         //Photon codes: 200-255 (https://doc-api.photonengine.com/en/pun/v2/class_photon_1_1_realtime_1_1_event_code.html)
         AzureNodeInfoEvent = 210,
