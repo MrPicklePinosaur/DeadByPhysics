@@ -28,7 +28,6 @@ public class RoomManager : EventListener {
             IsOpen = true,
             MaxPlayers = 5
         }, TypedLobby.Default);
-
     }
 
     public void StartGame() {
@@ -55,6 +54,7 @@ public class RoomManager : EventListener {
 
     public void SetReady(bool ready) {
         this.isReady = ready;
+        eventSystem.RaiseNetworkEvent(EventCodes.OnTestEvent, new object[] { ready });
     }
 
     public override void OnEvent(EventData data) {
@@ -63,6 +63,10 @@ public class RoomManager : EventListener {
             case (byte)EventCodes.JoinEvent:
                 currentRoom = PhotonNetwork.CurrentRoom;
                 Debug.Log("Successfully Joined Room");
+                break;
+            case (byte)EventCodes.OnTestEvent:
+                object[] payload = (object[])data.CustomData;
+                Debug.Log(payload[0]);
                 break;
         }
 

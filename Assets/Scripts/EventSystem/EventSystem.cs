@@ -12,8 +12,6 @@ public class EventSystem : MonoBehaviour {
 
     private void Awake() {
         EventSystem.eventSystem = this;
-
-        
     }
 
     public enum EventCodes {
@@ -42,7 +40,7 @@ public class EventSystem : MonoBehaviour {
 
 
         //Network events 100-199
-
+        OnTestEvent = 101,
 
 
         //Photon codes: 200-255 (https://doc-api.photonengine.com/en/pun/v2/class_photon_1_1_realtime_1_1_event_code.html)
@@ -68,10 +66,14 @@ public class EventSystem : MonoBehaviour {
         EventReceived?.Invoke(new EventData() { Code = (byte)eventCode });
     }
 
-    public void RaiseNetworkEvent(EventCodes eventCode, ReceiverGroup recievers=ReceiverGroup.All) {
+
+    public void RaiseNetworkEvent(EventCodes eventCode, object[] ctx, ReceiverGroup recievers=ReceiverGroup.All) {
         RaiseEventOptions eventOpt = new RaiseEventOptions() { Receivers = recievers };
         SendOptions sendOpt = new SendOptions() { Reliability = true };
-        PhotonNetwork.RaiseEvent((byte)eventCode, new object[] { }, eventOpt, sendOpt);
+        PhotonNetwork.RaiseEvent((byte)eventCode, ctx, eventOpt, sendOpt);
+    }
+    public void RaiseNetworkEvent(EventCodes eventCode, ReceiverGroup recievers = ReceiverGroup.All) {
+        RaiseNetworkEvent(eventCode, new object[] { }, recievers);
     }
 
 
