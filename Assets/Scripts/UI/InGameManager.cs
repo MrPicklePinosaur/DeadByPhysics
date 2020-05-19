@@ -10,7 +10,7 @@ using static PlayerProfile;
 public class InGameManager : EventListener {
 
     public GameObject generatorFrame;
-
+    
     void Start() {
         base.Start();
     }
