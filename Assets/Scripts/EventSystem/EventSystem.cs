@@ -15,6 +15,7 @@ public class EventSystem : MonoBehaviour {
     }
 
     public enum EventCodes {
+
         //PUN callback codes: 0-29
         OnConnectedEvent = 0,
         OnLeftRoomEvent = 1,
@@ -38,9 +39,14 @@ public class EventSystem : MonoBehaviour {
 
 
 
-
         //Network events 100-199
-        OnChatMessage = 101,
+        OnChatMessageEvent = 101, //format: { message: string }
+
+        OnEnterInteractAreaEvent = 111, //used to display an 'E' icon whenever player can interact with sm
+        OnExitInteractAreaEvent = 112,
+
+        OnPlayerInteractEvent = 115, //format: { actorId: int } fired whenever a player presses the 'E' key
+
 
         //Photon codes: 200-255 (https://doc-api.photonengine.com/en/pun/v2/class_photon_1_1_realtime_1_1_event_code.html)
         AzureNodeInfoEvent = 210,

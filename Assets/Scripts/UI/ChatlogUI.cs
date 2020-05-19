@@ -11,7 +11,6 @@ using static EventSystem;
 
 public class ChatlogUI : EventListener {
 
-
     VerticalLayoutGroup messageWindow;
     TMP_InputField input;
 
@@ -25,7 +24,7 @@ public class ChatlogUI : EventListener {
         input.onSubmit.AddListener(delegate {
 
             if (input.text.Length == 0) { return; }
-            eventSystem.RaiseNetworkEvent(EventCodes.OnChatMessage, new object[] { CreateTextMessage(input.text)});
+            eventSystem.RaiseNetworkEvent(EventCodes.OnChatMessageEvent, new object[] { CreateTextMessage(input.text)});
             input.text = ""; //clear text
         });
     }
@@ -34,7 +33,7 @@ public class ChatlogUI : EventListener {
         object[] payload = (object[])data.CustomData;
 
         switch (data.Code) {
-            case (byte)EventCodes.OnChatMessage:
+            case (byte)EventCodes.OnChatMessageEvent:
                 AddNewMessage((string)payload[0]);
                 break;
         }
