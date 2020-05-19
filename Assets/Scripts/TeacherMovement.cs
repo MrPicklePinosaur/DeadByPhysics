@@ -6,22 +6,43 @@ public class TeacherMovement : MonoBehaviour
 {
     // Start is called before the first frame update
     public float Speed;
-
+    private Rigidbody rb;
     public Animator aniMan;
+    bool setAttack = false;
     // Update is called once per frame
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
+
     void Update()
     {
         PlayerMovement();
+        rb.angularVelocity = new Vector3(0, 0, 0);
+    }
+    private void stopAttacking()
+    {
+        aniMan.SetBool("isAttacking", false);
     }
     void PlayerMovement()
     {
         if (Input.GetKeyDown("space"))
         {
-            aniMan.SetBool("isAttacking", true);
+            if (!setAttack)
+            {
+                setAttack = true;
+            }
         }
         else if (Input.GetKeyUp("space"))
         {
-            aniMan.SetBool("isAttacking", false);
+            setAttack = false;
+        }
+        else if(setAttack && !aniMan.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        {
+            aniMan.SetBool("isAttacking", true);
+            aniMan.SetBool("Hit", false);
+            setAttack = false;
         }
         else if(!aniMan.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
