@@ -11,16 +11,24 @@ using static PlayerProfile;
 [RequireComponent(typeof(Collider))]
 public class Generator : EventListener {
 
+    static int curGenId = 0;
+    public int generatorId;
+
     Collider col;
 
-    bool isBeingUsed;
+    int interactingActor; //the actor that is interacting with the generator at this point (-1 signifies no one interacting)
     List<int> playersInInteractZone; //players who are within interaction range
 
     void Start() {
         base.Start();
 
+        generatorId = curGenId;
+        curGenId += 1;
+
         col = GetComponent<Collider>();
         playersInInteractZone = new List<int>();
+
+        interactingActor = -1;
     }
 
     public override void OnEvent(EventData data) {
@@ -33,11 +41,13 @@ public class Generator : EventListener {
                 //add player to list of players in zone
                 int actorId = (int)payload[0];
                 if (!playersInInteractZone.Contains(actorId)) playersInInteractZone.Add(actorId);
+                Debug.Log($"{actorId} entered");
                 break; 
 
             case (byte)EventCodes.OnExitInteractAreaEvent: 
                 actorId = (int)payload[0];
                 if (playersInInteractZone.Contains(actorId)) playersInInteractZone.Remove(actorId);
+                Debug.Log($"{actorId} left");
                 break; 
 
             case (byte)EventCodes.OnPlayerInteractEvent:
@@ -45,10 +55,32 @@ public class Generator : EventListener {
                 //NOTE: this might be a problem if a player is in two interact zones at once, as it will trigger both
                 actorId = (int)payload[0];
                 if (playersInInteractZone.Contains(actorId)) {
-                    //Raise successful interact event here
+
+                    //if no one is interacting, set the current interacting actor
+                    if (interactingActor == -1) {
+                        interactingActor = actorId;
+
+                        //Raise successful interact event here
+                        if (playerProfile.player.ActorNumber == actorId) {
+                            eventSystem.RaiseNetworkEvent(EventCodes.OnOpenGeneratorWindowEvent, new object[] { generatorId, actorId });
+                        }
+                        
+                        Debug.Log($"{actorId} is INTERACTING!!");
+
+                    } else if (interactingActor == actorId) { //if person who pressed interact key is already interacting, uninteract
+                        interactingActor = -1;
+
+                        //Raise un interact event
+                        if (playerProfile.player.ActorNumber == actorId) {
+                            eventSystem.RaiseNetworkEvent(EventCodes.OnCloseGeneratorWindowEvent, new object[] { generatorId, actorId });
+                        }
+                        Debug.Log($"{actorId} stopped INTERACTING!!");
+                    }
+
                 }
 
                 break;
+            
         }
     }
 
