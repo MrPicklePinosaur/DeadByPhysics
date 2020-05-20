@@ -36,8 +36,9 @@ public class EventSystem : MonoBehaviour {
 
 
         //Client event 50-99
-        OnOpenGeneratorWindowEvent = 117, //format: { generatorId: int, targetActor: int}
-        OnCloseGeneratorWindowEvent = 118, //format: { generatorId: int, targetActor: int}
+        OnOpenGeneratorWindowEvent = 50, //format: { generatorId: int, targetActor: int}
+        OnCloseGeneratorWindowEvent = 51, //format: { generatorId: int, targetActor: int}
+
 
 
         //Network events 100-199
@@ -47,6 +48,7 @@ public class EventSystem : MonoBehaviour {
         OnExitInteractAreaEvent = 112,
 
         OnPlayerInteractEvent = 115, //format: { actorId: int } fired whenever a player presses the 'E' key
+        OnPlayerDamageEvent = 116, //format: { actorId: int }
 
         //Photon codes: 200-255 (https://doc-api.photonengine.com/en/pun/v2/class_photon_1_1_realtime_1_1_event_code.html)
         AzureNodeInfoEvent = 210,
