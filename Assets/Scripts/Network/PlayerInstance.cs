@@ -34,32 +34,31 @@ public class PlayerInstance : EventListener {
             //choose a player to be the teacher
             Player[] playerList = PhotonNetwork.PlayerList;
 
-            int teacherInd = Random.Range(0, 5);
-            for (var i = 0; i < 5; i++) {
+            int teacherInd = Random.Range(0, playerList.Length);
+            for (var i = 0; i < playerList.Length; i++) {
                 if (i == teacherInd) continue;
 
                 //tell player to init
-                eventSystem.RaiseNetworkEvent(EventCodes.OnStudentInitEvent, new object[] { playerProfile.player.ActorNumber });
+                eventSystem.RaiseNetworkEvent(EventCodes.OnStudentInitEvent, new object[] { playerList[i].ActorNumber });
             }
             //tell teacher to init
-            eventSystem.RaiseNetworkEvent(EventCodes.OnTeacherInitEvent, new object[] { playerProfile.player.ActorNumber });
+            eventSystem.RaiseNetworkEvent(EventCodes.OnTeacherInitEvent, new object[] { playerList[teacherInd].ActorNumber });
         }
-
-        //misc init 
-        playerStatus = PlayerStatus.Excellent;
 
     }
 
     public void InitStudent() {
         Debug.Log("Initing student");
         clientAvatar = PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+        playerStatus = PlayerStatus.Excellent;
     }
 
     public void InitTeacher() {
         Debug.Log("Initing teacher");
         //init teacher
 
-        //clientAvatar = PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+        clientAvatar = PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+        //not playerstatus is not inited for teacher
     }
 
     public override void OnEvent(EventData data) {
@@ -96,6 +95,16 @@ public class PlayerInstance : EventListener {
 
                 //update current status
 
+                switch (playerStatus) {
+
+                    case PlayerStatus.Excellent:
+                        playerStatus = PlayerStatus.Satisfactory;
+                        break;
+                    case PlayerStatus.Satisfactory:
+                        playerStatus = PlayerStatus.NeedsImprovement;
+                        //trigger 'death' here
+                        break;
+                }
 
                 //send message out to everyone to update status on ui
                 eventSystem.RaiseNetworkEvent(EventCodes.OnPlayerStatusChange, new object[] { actorId, playerStatus });
@@ -103,8 +112,6 @@ public class PlayerInstance : EventListener {
                 break;
 
             //handle player disconnect, send message out to update status to disconnected
-
-
 
 
         }

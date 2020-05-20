@@ -26,6 +26,11 @@ public class NetworkPlayerController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.E)) {
             eventSystem.RaiseNetworkEvent(EventCodes.OnPlayerInteractEvent, new object[] { playerProfile.player.ActorNumber });
         }
+
+        //testing take damage
+        if (Input.GetKeyDown(KeyCode.P)) {
+            eventSystem.RaiseNetworkEvent(EventCodes.OnPlayerDamageEvent, new object[] { playerProfile.player.ActorNumber });
+        }
         
     }
     
