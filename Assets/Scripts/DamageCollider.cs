@@ -10,7 +10,10 @@ public class DamageCollider : MonoBehaviour
     {
         if (collisionInfo.collider.tag == "Character" && aniMan.GetBool("isAttacking") && !aniMan.GetBool("Hit"))
         {
-            Debug.Log("Hit");
+            GameObject character = collisionInfo.collider.gameObject;
+            
+            character.GetComponent<PlayerDamageReceiver>().Hit();
+            Debug.Log("Hit "+character.name);
             aniMan.SetBool("Hit", true);
         }
         Debug.Log(collisionInfo.collider.tag);
