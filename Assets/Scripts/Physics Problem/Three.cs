@@ -24,7 +24,7 @@ public class Three : MonoBehaviour
         answer = 0;
         //Generate distance between charges
         distance = Mathf.Round(Random.Range(10.0f,100.0f));
-        canvas.transform.GetChild(7).GetComponent<TMP_Text>().text = "Distance between charges: " + distance.ToString() + ".00 m";
+        canvas.transform.GetChild(7).GetComponent<TMP_Text>().text = "Given the distances between adjacent charges is " + distance.ToString() + ".00 m, calculate the total electric potential energy of the group of charges.";
         Debug.Log(distance);
         //Generate which shape
         problem = Random.Range(0,4);

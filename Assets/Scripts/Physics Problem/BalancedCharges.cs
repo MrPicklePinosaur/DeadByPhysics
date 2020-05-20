@@ -13,11 +13,13 @@ public class BalancedCharges : MonoBehaviour
     public GameObject rHolder;
     public GameObject lHolder;
     public Text rText, lText;
+
     private float ansProp = 0f;
     private int correct = 0;
     private void OnEnable()
     {
         correct = 0;
+        makeNewProblem();
     }
     public void sliderChange()
     {
@@ -86,6 +88,7 @@ public class BalancedCharges : MonoBehaviour
         {
             Debug.Log("correct");
             correct += 1;
+            Exit();
         }
         else
         {
@@ -97,5 +100,9 @@ public class BalancedCharges : MonoBehaviour
     {
         correct = 0;
         makeNewProblem();
+    }
+    public void Exit()
+    {
+        this.gameObject.SetActive(false);
     }
 }
