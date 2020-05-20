@@ -1,17 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using UnityEngine;
 
 public class ThirdPersonCharacterController : MonoBehaviour
 {
     // Start is called before the first frame update
     public float Speed;
-
+    private Rigidbody rb;
     public Animator aniMan;
     // Update is called once per frame
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
     void Update()
     {
         PlayerMovement();
+        
+        rb.angularVelocity = new Vector3(0, 0, 0);
     }
     void PlayerMovement()
     {
