@@ -13,10 +13,8 @@ public class DamageCollider : MonoBehaviour
             GameObject character = collisionInfo.collider.gameObject;
             
             character.GetComponent<PlayerDamageReceiver>().Hit();
-            Debug.Log("Hit "+character.name);
             aniMan.SetBool("Hit", true);
         }
-        Debug.Log(collisionInfo.collider.tag);
     }
     // Update is called once per frame
     void Update()
