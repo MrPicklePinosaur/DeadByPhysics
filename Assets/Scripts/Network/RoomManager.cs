@@ -35,10 +35,11 @@ public class RoomManager : EventListener {
 
         if (PhotonNetwork.IsMasterClient) {
 
-            //load into new scene
+            //choose one person as the teacher
 
             //TODO: add better system for identifying scene index (prob enum)
             PhotonNetwork.LoadLevel(1);
+
 
         }
     }

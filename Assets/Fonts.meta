@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Photon.meta
+guid: e9bcbac52e3fa554ca608fb4d9a9154e
+=======
 guid: 9a92dcbd2ac15884a9e53c29dd95cf44
+>>>>>>> b3ad02761cd90507ae44b83d58907af1d5a1c2c0:Assets/Fonts.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
