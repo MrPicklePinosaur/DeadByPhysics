@@ -71,9 +71,8 @@ public class NetworkPlayerController : EventListener {
                 int actorId = (int)payload[0];
                 Debug.Log($"{actorId} is dead");
 
-                if (actorId == playerProfile.player.ActorNumber) {
-                    HandleDeath();
-                }
+                HandleDeath(actorId);
+
 
                 break;
             case (byte)EventCodes.OnPlayerReviveEvent:
@@ -83,16 +82,18 @@ public class NetworkPlayerController : EventListener {
         }
     }
 
-    public void HandleDeath() {
+    public void HandleDeath(int actorId) {
         isTrapped = true; //disable movement
 
         //choose prison to place player in
         Prison prison = gameManager.FindOpenPrison();
         prison.SetOccupant(playerProfile.player.ActorNumber);
 
-        //teleport player to prison
-        transform.position = prison.trappedPosition.transform.position;
-
+        if (actorId == playerProfile.player.ActorNumber) {
+            //teleport player to prison
+            transform.position = prison.trappedPosition.transform.position;
+        }
+        
         //do sm with animation
 
 
