@@ -36,7 +36,7 @@ public class PlayerStatusUI : EventListener {
                 SetPlayerUsername(actorId);
 
                 //refresh ui
-                eventSystem.RaiseNetworkEvent(EventCodes.OnPlayerStatusChange, new object[] { actorId, PlayerStatus.Excellent });
+                //eventSystem.RaiseNetworkEvent(EventCodes.OnPlayerStatusChange, new object[] { actorId, PlayerStatus.Excellent });
 
                 break;
 
@@ -52,6 +52,7 @@ public class PlayerStatusUI : EventListener {
 
     public void SetPlayerUsername(int actorId) {
         //get index of element by actor number
+
         int uiInd = actorNumbers.IndexOf(actorId);
         GameObject playerStatusUI = transform.GetChild(uiInd).gameObject;
 
@@ -60,7 +61,7 @@ public class PlayerStatusUI : EventListener {
     }
 
     public void UpdatePlayerStatusUI(int actorId, PlayerStatus playerStatus) {
-        Debug.Log($"Updating status to {playerStatus}");
+        Debug.Log($"Updating ${actorId} status to {playerStatus}");
 
         int uiInd = actorNumbers.IndexOf(actorId);
         GameObject playerStatusUI = transform.GetChild(uiInd).gameObject;
