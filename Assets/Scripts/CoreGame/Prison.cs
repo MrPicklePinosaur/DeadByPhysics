@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Prison : MonoBehaviour {
 
-    int occupiedBy = -1; //the player that is in the prison
-    GameObject trappedPosition; 
+    public int occupiedBy = -1; //the player that is in the prison
+    public GameObject trappedPosition; 
     
+    public void SetOccupant(int actorId) { this.occupiedBy = actorId; }
+    public void RemoveOccupant() { this.occupiedBy = -1; }
+
 }

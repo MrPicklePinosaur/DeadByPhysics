@@ -6,6 +6,8 @@ using UnityEngine;
 using static PlayerProfile;
 using static EventSystem;
 using static PlayerInstance;
+using static GameManager;
+
 using ExitGames.Client.Photon;
 
 [RequireComponent(typeof(PhotonView),typeof(PhotonAnimatorView),typeof(Animator))]
@@ -65,7 +67,13 @@ public class NetworkPlayerController : EventListener {
         switch (data.Code) {
 
             case (byte)EventCodes.OnPlayerDeathEvent:
-                isTrapped = true;
+
+                int actorId = (int)payload[0];
+                Debug.Log($"{actorId} is dead");
+
+                if (actorId == playerProfile.player.ActorNumber) {
+                    HandleDeath();
+                }
 
                 break;
             case (byte)EventCodes.OnPlayerReviveEvent:
@@ -73,5 +81,20 @@ public class NetworkPlayerController : EventListener {
 
                 break;
         }
+    }
+
+    public void HandleDeath() {
+        isTrapped = true; //disable movement
+
+        //choose prison to place player in
+        Prison prison = gameManager.FindOpenPrison();
+        prison.SetOccupant(playerProfile.player.ActorNumber);
+
+        //teleport player to prison
+        transform.position = prison.trappedPosition.transform.position;
+
+        //do sm with animation
+
+
     }
 }

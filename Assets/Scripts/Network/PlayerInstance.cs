@@ -105,7 +105,6 @@ public class PlayerInstance : EventListener {
             //handle player disconnect, send message out to update status to disconnected
 
 
-            //handle player 'death'
 
 
         }
@@ -122,7 +121,7 @@ public class PlayerInstance : EventListener {
             case PlayerStatus.Satisfactory:
                 playerStatus = PlayerStatus.NeedsImprovement;
                 //trigger 'death' here
-                eventSystem.RaiseNetworkEvent(EventCodes.OnPlayerDeathEvent, new object[] { PhotonNetwork.LocalPlayer.ActorNumber });
+                eventSystem.RaiseNetworkEvent(EventCodes.OnPlayerDeathEvent, new object[] { playerProfile.player.ActorNumber });
 
                 break;
         }
