@@ -16,26 +16,23 @@ public enum PlayerStatus {
 //Singleton holding info about current player
 public class PlayerInstance : EventListener {
 
-    public static PlayerInstance playerInstance;
-    public static int curPlayerNumber = 0;
+    public static PlayerInstance gameManager;
 
-    public int playerNumber;
-    public PlayerStatus playerStatus;
-
+    //client owner info
     public GameObject clientAvatar; //reference to the player gameobject
+    public PlayerStatus playerStatus;
+    public bool isTeacher;
 
     void Start() {
         base.Start();
 
-        playerInstance = this;
+        gameManager = this;
 
-        playerNumber = curPlayerNumber;
-        curPlayerNumber += 1;
+        //client specific info
+        clientAvatar = PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
 
         playerStatus = PlayerStatus.Excellent;
 
-        clientAvatar = PhotonNetwork.Instantiate("Player",Vector3.zero,Quaternion.identity);
-        
     }
 
     public override void OnEvent(EventData data) {
@@ -46,17 +43,19 @@ public class PlayerInstance : EventListener {
             //handle taking damage   ONPLAYERHIT
             case (byte)EventCodes.OnPlayerDamageEvent:
                 int actorId = (int)payload[0];
-                //change state if we own
-                if (actorId == playerProfile.player.ActorNumber) {
 
-                }
+                //we only care if we own
+                if (actorId != playerProfile.player.ActorNumber) break;
+
+                //update current status
 
 
-
+                //send message out to everyone to update status on ui
+                eventSystem.RaiseNetworkEvent(EventCodes.OnPlayerStatusChange, new object[] { actorId, playerStatus });
                 
                 break;
 
-            //handle player disconnect
+            //handle player disconnect, send message out to update status to disconnected
 
         }
     }

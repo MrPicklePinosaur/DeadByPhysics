@@ -43,12 +43,15 @@ public class EventSystem : MonoBehaviour {
 
         //Network events 100-199
         OnChatMessageEvent = 101, //format: { message: string }
+        OnPlayerStatusChange = 102, //format: { actorId: int, status: PlayerStatus (int) }
 
         OnEnterInteractAreaEvent = 111, //used to display an 'E' icon whenever player can interact with sm
         OnExitInteractAreaEvent = 112,
 
         OnPlayerInteractEvent = 115, //format: { actorId: int } fired whenever a player presses the 'E' key
         OnPlayerDamageEvent = 116, //format: { actorId: int }
+
+
 
         //Photon codes: 200-255 (https://doc-api.photonengine.com/en/pun/v2/class_photon_1_1_realtime_1_1_event_code.html)
         AzureNodeInfoEvent = 210,

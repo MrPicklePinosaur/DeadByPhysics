@@ -4,46 +4,41 @@ using ExitGames.Client.Photon;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
+using static EventSystem;
 
 public class PlayerStatusUI : EventListener {
 
+    //keep track of actorIDs
+    public int[] actorNumbers = new int[] { -1, -1, -1, -1 };
+
     void Start() {
         base.Start();
+
+        //prepopulate
+        //foreach connected player (not teacher), fill actorNumber array
+
+
+        //set usernames and status for each player
+
     }
 
     public override void OnEvent(EventData data) {
-        
+        object[] payload = (object[])data.CustomData;
+
         switch (data.Code) {
 
-            
+            //catch update status 
+            case (byte)EventCodes.OnPlayerStatusChange:
+                int actorId = (int)payload[0];
+                PlayerStatus playerStatus = (PlayerStatus)payload[1];
+                UpdatePlayerStatusUI(actorId, playerStatus);
 
+                break;
         }
     }
 
-    /*
-
-    public void SetStatus(int playerNumber, PlayerStatus status) {
- 
-        GameObject playerFrame = transform.GetChild(playerNumber).gameObject;
-
-        //remove old status
-
-        //instantiate new status
-        switch (status) {
-            case PlayerStatus.Excellent:
-                break;
-            case PlayerStatus.Satisfactory:
-                break;
-            case PlayerStatus.NeedsImprovement:
-                break;
-            case PlayerStatus.Disconnected:
-                break;
-            default:
-                Debug.LogWarning("Invalid player status");
-                break;
-        } 
+    public void UpdatePlayerStatusUI(int actorId, PlayerStatus playerStatus) {
 
     }
-    */
 
 }
