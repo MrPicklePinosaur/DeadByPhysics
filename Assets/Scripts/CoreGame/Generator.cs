@@ -6,13 +6,14 @@ using UnityEngine;
 using static EventSystem;
 using static PlayerProfile;
 
+//NOTE: lmao, the eventsystem doesnt identify which generator the player is entering, add some sort of id to each interactable object
+
 //NOTE, make the generator have a trigger collision to act as the activation range, and make
 // a seperate collider as a child for the actual physical collider
 [RequireComponent(typeof(Collider))]
 public class Generator : EventListener {
 
-    static int curGenId = 0;
-    public int generatorId;
+    public int interactable_id;
 
     Collider col;
 
@@ -21,9 +22,6 @@ public class Generator : EventListener {
 
     void Start() {
         base.Start();
-
-        generatorId = curGenId;
-        curGenId += 1;
 
         col = GetComponent<Collider>();
         playersInInteractZone = new List<int>();
@@ -40,14 +38,20 @@ public class Generator : EventListener {
             case (byte)EventCodes.OnEnterInteractAreaEvent:
                 //add player to list of players in zone
                 int actorId = (int)payload[0];
+                int interact_id = (int)payload[1];
+
+                if (interact_id != this.interactable_id) { break; }
                 if (!playersInInteractZone.Contains(actorId)) playersInInteractZone.Add(actorId);
-                Debug.Log($"{actorId} entered");
+                Debug.Log($"{actorId} entered interactible object number {interactable_id}");
                 break; 
 
             case (byte)EventCodes.OnExitInteractAreaEvent: 
                 actorId = (int)payload[0];
+                interact_id = (int)payload[1];
+
+                if (interact_id != this.interactable_id) { break; }
                 if (playersInInteractZone.Contains(actorId)) playersInInteractZone.Remove(actorId);
-                Debug.Log($"{actorId} left");
+                Debug.Log($"{actorId} left interactible object number {interactable_id}");
                 break; 
 
             case (byte)EventCodes.OnPlayerInteractEvent:
@@ -62,19 +66,21 @@ public class Generator : EventListener {
 
                         //Raise successful interact event here
                         if (playerProfile.player.ActorNumber == actorId) {
-                            eventSystem.RaiseNetworkEvent(EventCodes.OnOpenGeneratorWindowEvent, new object[] { generatorId, actorId });
+                            eventSystem.RaiseNetworkEvent(EventCodes.OnOpenGeneratorWindowEvent, new object[] { interactable_id, actorId });
+                            Debug.Log($"{actorId} is INTERACTING!! with interactible id {interactable_id}");
                         }
                         
-                        Debug.Log($"{actorId} is INTERACTING!!");
+                        
 
                     } else if (interactingActor == actorId) { //if person who pressed interact key is already interacting, uninteract
                         interactingActor = -1;
 
                         //Raise un interact event
                         if (playerProfile.player.ActorNumber == actorId) {
-                            eventSystem.RaiseNetworkEvent(EventCodes.OnCloseGeneratorWindowEvent, new object[] { generatorId, actorId });
+                            eventSystem.RaiseNetworkEvent(EventCodes.OnCloseGeneratorWindowEvent, new object[] { interactable_id, actorId });
+                            Debug.Log($"{actorId} stopped INTERACTING!! with interactible id {interactable_id}");
                         }
-                        Debug.Log($"{actorId} stopped INTERACTING!!");
+                        
                     }
 
                 }
@@ -89,7 +95,7 @@ public class Generator : EventListener {
         //NOTE: TEMP USING THIS PLAYERCONTROLLER
         NetworkPlayerController cont = other.gameObject.GetComponent<NetworkPlayerController>();
         if (cont != null && cont.view.IsMine) { //if player that entered is owned by this session
-            eventSystem.RaiseNetworkEvent(EventCodes.OnEnterInteractAreaEvent, new object[] { playerProfile.player.ActorNumber });
+            eventSystem.RaiseNetworkEvent(EventCodes.OnEnterInteractAreaEvent, new object[] { playerProfile.player.ActorNumber, interactable_id });
         }
     }
 
@@ -97,7 +103,7 @@ public class Generator : EventListener {
 
         NetworkPlayerController cont = other.gameObject.GetComponent<NetworkPlayerController>();
         if (cont != null && cont.view.IsMine) { //if player that entered is owned by this session
-            eventSystem.RaiseNetworkEvent(EventCodes.OnExitInteractAreaEvent, new object[] { playerProfile.player.ActorNumber });
+            eventSystem.RaiseNetworkEvent(EventCodes.OnExitInteractAreaEvent, new object[] { playerProfile.player.ActorNumber, interactable_id });
         }
     }
 
