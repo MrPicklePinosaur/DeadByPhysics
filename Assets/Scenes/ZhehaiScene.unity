@@ -710,7 +710,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &78821362
 Light:
   m_ObjectHideFlags: 0
@@ -7065,6 +7065,11 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2753737268124702450, guid: 1148ab54193311b489619bc7f5c49f12,
+        type: 3}
+      propertyPath: m_Type
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2753737268189020167, guid: 1148ab54193311b489619bc7f5c49f12,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -7114,6 +7119,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2753737268705362046, guid: 1148ab54193311b489619bc7f5c49f12,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2753737269014729395, guid: 1148ab54193311b489619bc7f5c49f12,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2753737269014729405, guid: 1148ab54193311b489619bc7f5c49f12,
+        type: 3}
+      propertyPath: m_Type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2753737269014729405, guid: 1148ab54193311b489619bc7f5c49f12,
+        type: 3}
+      propertyPath: m_Range
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2753737269044698451, guid: 1148ab54193311b489619bc7f5c49f12,
         type: 3}
