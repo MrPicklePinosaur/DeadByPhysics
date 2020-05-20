@@ -20,11 +20,12 @@ public class PlayerStatusUI : EventListener {
 
         //set usernames and status for each player
 
+
     }
 
     public override void OnEvent(EventData data) {
         object[] payload = (object[])data.CustomData;
-
+        
         switch (data.Code) {
 
             //catch update status 

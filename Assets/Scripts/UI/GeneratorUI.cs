@@ -1,18 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using ExitGames.Client.Photon;
+using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 using static EventSystem;
 
 using static PlayerProfile;
 
-public class InGameManager : EventListener {
+public class GeneratorUI : EventListener {
 
     public GameObject generatorFrame;
     
     void Start() {
         base.Start();
+
     }
 
 
@@ -20,6 +22,8 @@ public class InGameManager : EventListener {
         object[] payload = (object[])data.CustomData;
 
         switch (data.Code) {
+
+
             case (byte)EventCodes.OnOpenGeneratorWindowEvent:
                 int targetActor = (int)payload[1];
                 

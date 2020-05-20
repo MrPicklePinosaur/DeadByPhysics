@@ -51,7 +51,8 @@ public class EventSystem : MonoBehaviour {
         OnPlayerInteractEvent = 115, //format: { actorId: int } fired whenever a player presses the 'E' key
         OnPlayerDamageEvent = 116, //format: { actorId: int }
 
-
+        OnStudentInitEvent = 120, //format: { actorId: int }
+        OnTeacherInitEvent = 121, //format: { actorId: int }
 
         //Photon codes: 200-255 (https://doc-api.photonengine.com/en/pun/v2/class_photon_1_1_realtime_1_1_event_code.html)
         AzureNodeInfoEvent = 210,
