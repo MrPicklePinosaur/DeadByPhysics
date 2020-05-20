@@ -3,32 +3,26 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using UnityEngine;
 
-public class ThirdPersonCharacterController : MonoBehaviour
-{
-    // Start is called before the first frame update
+public class ThirdPersonCharacterController : MonoBehaviour {
+
     public float Speed;
     private Rigidbody rb;
     public Animator aniMan;
-    // Update is called once per frame
-    void Start()
-    {
+
+    void Start() {
         rb = GetComponent<Rigidbody>();
     }
-    void Update()
-    {
+    void Update() {
         PlayerMovement();
         
         rb.angularVelocity = new Vector3(0, 0, 0);
     }
-    void PlayerMovement()
-    {
-        if (Input.GetKeyDown("left shift"))
-        {
+    void PlayerMovement() {
+        if (Input.GetKeyDown("left shift")) {
             Speed *= 2;
 
         }
-        if (Input.GetKeyUp("left shift"))
-        {
+        if (Input.GetKeyUp("left shift")) {
             Speed /= 2;
         }
         float hor = Input.GetAxis("Vertical")*Speed;
