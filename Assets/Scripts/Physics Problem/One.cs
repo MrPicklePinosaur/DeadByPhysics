@@ -144,7 +144,8 @@ public class One : MonoBehaviour
 
     public void Exit()
     {
-        OnDisable();
+
+        problem.SetActive(false);
     }
 
 }
