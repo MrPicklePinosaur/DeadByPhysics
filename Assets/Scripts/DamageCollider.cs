@@ -2,23 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageCollider : MonoBehaviour
-{
-    public Animator aniMan;
-    
-    void OnCollisionEnter(Collision collisionInfo)
-    {
-        if (collisionInfo.collider.tag == "Character" && aniMan.GetBool("isAttacking") && !aniMan.GetBool("Hit"))
-        {
-            GameObject character = collisionInfo.collider.gameObject;
-            
-            character.GetComponent<PlayerDamageReceiver>().Hit();
-            aniMan.SetBool("Hit", true);
+using static EventSystem;
+
+public class DamageCollider : MonoBehaviour {
+    Animator anim;
+
+    public void Start() {
+        anim = GetComponentInParent<Animator>();
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        
+
+        if (other.gameObject.GetComponent<NetworkPlayerController>() != null && anim.GetBool("isAttacking") && !anim.GetBool("Hit")) {
+
+            anim.SetBool("Hit", true);
+
+            //send player hit event here
+            Debug.Log("HIT PLAYER YAYYY");
+            //eventSystem.RaiseNetworkEvent(EventCodes.OnPlayerDamageEvent, new object[] {  });
         }
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
