@@ -51,6 +51,9 @@ public class EventSystem : MonoBehaviour {
         OnPlayerInteractEvent = 115, //format: { actorId: int } fired whenever a player presses the 'E' key
         OnPlayerDamageEvent = 116, //format: { actorId: int }
 
+        OnPlayerDeathEvent = 117, //format: { actorId: int }
+        OnPlayerReviveEvent = 118, //format: { actorId: int }
+
         OnStudentInitEvent = 120, //format: { actorId: int }
         OnTeacherInitEvent = 121, //format: { actorId: int }
 

@@ -14,15 +14,18 @@ public class PlayerStatusUI : EventListener {
 
     //keep track of actorIDs
     public List<int> actorNumbers;
+    RectTransform rectTransform;
 
     void Start() {
         base.Start();
 
         actorNumbers = new List<int>();
+        rectTransform = GetComponent<RectTransform>();
 
     }
 
     public override void OnEvent(EventData data) {
+
         object[] payload = (object[])data.CustomData;
         
         switch (data.Code) {
@@ -30,13 +33,22 @@ public class PlayerStatusUI : EventListener {
             //catch inits
             case (byte)EventCodes.OnStudentInitEvent:
                 int actorId = (int)payload[0];
+
+                
                 actorNumbers.Add(actorId);
+                Debug.Log($"initing {actorId} UI");
+                foreach (int n in actorNumbers) {
+                    Debug.Log(n);
+                }
+                Debug.Log("=-=-=-=-=-=");
 
                 //also set username
                 SetPlayerUsername(actorId);
 
                 //refresh ui
-                //eventSystem.RaiseNetworkEvent(EventCodes.OnPlayerStatusChange, new object[] { actorId, PlayerStatus.Excellent });
+
+                UpdatePlayerStatusUI(actorId, PlayerStatus.Excellent);
+
 
                 break;
 
@@ -54,9 +66,9 @@ public class PlayerStatusUI : EventListener {
         //get index of element by actor number
 
         int uiInd = actorNumbers.IndexOf(actorId);
-        GameObject playerStatusUI = transform.GetChild(uiInd).gameObject;
+        GameObject playerStatusUI = rectTransform.GetChild(uiInd).gameObject;
 
-        TMP_Text username_text = GetComponentInChildren<TMP_Text>();
+        TMP_Text username_text = playerStatusUI.GetComponentInChildren<TMP_Text>();
         username_text.text = GetPlayerByActorID(actorId).NickName;
     }
 
@@ -64,10 +76,11 @@ public class PlayerStatusUI : EventListener {
         Debug.Log($"Updating ${actorId} status to {playerStatus}");
 
         int uiInd = actorNumbers.IndexOf(actorId);
-        GameObject playerStatusUI = transform.GetChild(uiInd).gameObject;
+
+        GameObject playerStatusUI = rectTransform.GetChild(uiInd).gameObject;
 
         //TEMP right now
-        Image image = GetComponentInChildren<Image>();
+        Image image = playerStatusUI.GetComponentInChildren<Image>();
 
         switch(playerStatus) {
             case PlayerStatus.Excellent:
@@ -93,4 +106,5 @@ public class PlayerStatusUI : EventListener {
         }
         return null;
     } 
+
 }

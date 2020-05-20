@@ -93,20 +93,9 @@ public class PlayerInstance : EventListener {
                 actorId = (int)payload[0];
 
                 //we only care if we own
-                if (actorId != playerProfile.player.ActorNumber) break;
+                if (actorId != playerProfile.player.ActorNumber) return;
 
-                //update current status
-
-                switch (playerStatus) {
-
-                    case PlayerStatus.Excellent:
-                        playerStatus = PlayerStatus.Satisfactory;
-                        break;
-                    case PlayerStatus.Satisfactory:
-                        playerStatus = PlayerStatus.NeedsImprovement;
-                        //trigger 'death' here
-                        break;
-                }
+                TakeDamage();
 
                 //send message out to everyone to update status on ui
                 eventSystem.RaiseNetworkEvent(EventCodes.OnPlayerStatusChange, new object[] { actorId, playerStatus });
@@ -116,6 +105,26 @@ public class PlayerInstance : EventListener {
             //handle player disconnect, send message out to update status to disconnected
 
 
+            //handle player 'death'
+
+
+        }
+    }
+
+    public void TakeDamage() {
+        //update current status
+
+        switch (playerStatus) {
+
+            case PlayerStatus.Excellent:
+                playerStatus = PlayerStatus.Satisfactory;
+                break;
+            case PlayerStatus.Satisfactory:
+                playerStatus = PlayerStatus.NeedsImprovement;
+                //trigger 'death' here
+                eventSystem.RaiseNetworkEvent(EventCodes.OnPlayerDeathEvent, new object[] { PhotonNetwork.LocalPlayer.ActorNumber });
+
+                break;
         }
     }
 

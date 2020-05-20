@@ -52,4 +52,5 @@ public class TeacherMovement : MonoBehaviour {
             aniMan.SetFloat("SideToSide Speed", ver);
         }
     }
+
 }

@@ -6,19 +6,24 @@ using UnityEngine;
 using static PlayerProfile;
 using static EventSystem;
 using static PlayerInstance;
+using ExitGames.Client.Photon;
 
 [RequireComponent(typeof(PhotonView),typeof(PhotonAnimatorView),typeof(Animator))]
-public class NetworkPlayerController : MonoBehaviour {
+public class NetworkPlayerController : EventListener {
 
     public PhotonView view;
-    protected PhotonAnimatorView photonAnim;
     protected Animator anim;
     public float moveSpeed;
 
+    public bool isTrapped;
+
     void Start() {
+        base.Start();
+
         view = GetComponent<PhotonView>();
-        photonAnim = GetComponent<PhotonAnimatorView>();
         anim = GetComponent<Animator>();
+
+        isTrapped = false;
     }
 
     void Update() {
@@ -31,12 +36,9 @@ public class NetworkPlayerController : MonoBehaviour {
         }
 
 
-        //testing take damage
-        if (Input.GetKeyDown(KeyCode.P)) {
-            eventSystem.RaiseNetworkEvent(EventCodes.OnPlayerDamageEvent, new object[] { playerProfile.player.ActorNumber });
+        if (!isTrapped) {
+            HandleMovement();
         }
-
-        HandleMovement();
 
     }
 
@@ -56,5 +58,20 @@ public class NetworkPlayerController : MonoBehaviour {
         anim.SetFloat("Forward/Backward Speed", move.z);
         anim.SetFloat("SideToSide Speed", move.x);
     }
-  
+
+    public override void OnEvent(EventData data) {
+        object[] payload = (object[])data.CustomData;
+
+        switch (data.Code) {
+
+            case (byte)EventCodes.OnPlayerDeathEvent:
+                isTrapped = true;
+
+                break;
+            case (byte)EventCodes.OnPlayerReviveEvent:
+                isTrapped = false;
+
+                break;
+        }
+    }
 }

@@ -272,6 +272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   view: {fileID: 0}
   moveSpeed: 2
+  isTrapped: 0
 --- !u!114 &1959245007118676105
 MonoBehaviour:
   m_ObjectHideFlags: 0
