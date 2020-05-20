@@ -49,16 +49,18 @@ public class PlayerInstance : EventListener {
 
     public void InitStudent() {
         Debug.Log("Initing student");
-        clientAvatar = PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+        clientAvatar = PhotonNetwork.Instantiate("Players/Student", Vector3.zero, Quaternion.identity);
         playerStatus = PlayerStatus.Excellent;
+        isTeacher = false;
     }
 
     public void InitTeacher() {
         Debug.Log("Initing teacher");
         //init teacher
 
-        clientAvatar = PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+        clientAvatar = PhotonNetwork.Instantiate("Players/Teacher", Vector3.zero, Quaternion.identity);
         //not playerstatus is not inited for teacher
+        isTeacher = true;
     }
 
     public override void OnEvent(EventData data) {
