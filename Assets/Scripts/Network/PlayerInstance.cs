@@ -49,7 +49,7 @@ public class PlayerInstance : EventListener {
 
     public void InitStudent() {
         Debug.Log("Initing student");
-        clientAvatar = PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+        clientAvatar = PhotonNetwork.Instantiate("Players/Student", Vector3.zero, Quaternion.identity);
         playerStatus = PlayerStatus.Excellent;
     }
 
@@ -57,7 +57,7 @@ public class PlayerInstance : EventListener {
         Debug.Log("Initing teacher");
         //init teacher
 
-        clientAvatar = PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+        clientAvatar = PhotonNetwork.Instantiate("Players/Student", Vector3.zero, Quaternion.identity);
         //not playerstatus is not inited for teacher
     }
 
