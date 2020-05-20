@@ -10,12 +10,13 @@ public class One : MonoBehaviour
     int current_F;
     public GameObject First;
     public GameObject Second;
+    public GameObject problem;
 
     string[,] answers = new string[,] {
         {"+","+","Single Outwards","+","Like Outwards" },
-        {"+","+","Single Outwards","-","Opposite" },
-        {"+","-","Single Outwards","+","Like Inwards" },
-        { "+", "-", "Single Outwards", "-", "Opposite Inverted" },
+        {"+","+","Single Outwards","-","Opposite Inverted" },
+        {"+","-","Single Inwards","+","Like Inwards" },
+        { "+", "-", "Single Inwards", "-", "Opposite" },
         { "-", "+", "Single Inwards", "+", "Opposite"},
         { "-", "+", "Single Inwards", "-", "Like Inwards"},
         { "-", "-", "Single Outwards", "+", "Opposite Inverted"},
@@ -80,11 +81,14 @@ public class One : MonoBehaviour
                     Second.transform.GetChild(current_F).gameObject.SetActive(true);
                 }
             }
-            
+            problem.transform.GetChild(3).gameObject.SetActive(false);
+            problem.transform.GetChild(4).gameObject.SetActive(true);
+
         }
         else
         {
             Debug.Log("Wrong, exit the application.");
+            Cleanup();
         }
 
         
@@ -96,12 +100,29 @@ public class One : MonoBehaviour
         if (Second.transform.GetChild(current_F).gameObject.name == answers[a, 4])
         {
             Debug.Log("Correct");
+            Cleanup();
 
         }
         else
         {
             Debug.Log("Wrong, exit the application.");
+            Cleanup();
         }
+    }
+
+    void Cleanup()
+    {
+        foreach (Transform child in Second.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+        foreach (Transform child in First.transform)
+        {
+            child.gameObject.SetActive(false);
+                
+        }
+        problem.transform.GetChild(3).gameObject.SetActive(true);
+        problem.transform.GetChild(4).gameObject.SetActive(false);
     }
 
 }
