@@ -24,12 +24,21 @@ public class One : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         
         current_Q = 1;
         a = Random.Range(0, 8);
         Debug.Log("The test charge is " + answers[a,1]);
+        //6 and 7
+        if(answers[a,1] == "-")
+        {
+            problem.transform.GetChild(6).gameObject.SetActive(true);
+        }
+        else
+        {
+            problem.transform.GetChild(7).gameObject.SetActive(true);
+        }
         foreach (Transform child in First.transform)
         {
            if (child.name == answers[a,0])
@@ -40,6 +49,11 @@ public class One : MonoBehaviour
             }
         }
 
+    }
+
+    void OnDisable()
+    {
+        Cleanup();
     }
 
     // Update is called once per frame
@@ -87,12 +101,10 @@ public class One : MonoBehaviour
         }
         else
         {
-            Debug.Log("Wrong, exit the application.");
+            Debug.Log("Wrong, try again.");
             Cleanup();
+            OnEnable();
         }
-
-        
-        
     }
 
     public void submit_Q()
@@ -100,13 +112,14 @@ public class One : MonoBehaviour
         if (Second.transform.GetChild(current_F).gameObject.name == answers[a, 4])
         {
             Debug.Log("Correct");
-            Cleanup();
+            problem.SetActive(false);
 
         }
         else
         {
-            Debug.Log("Wrong, exit the application.");
+            Debug.Log("Wrong, try again");
             Cleanup();
+            OnEnable();
         }
     }
 
@@ -123,6 +136,15 @@ public class One : MonoBehaviour
         }
         problem.transform.GetChild(3).gameObject.SetActive(true);
         problem.transform.GetChild(4).gameObject.SetActive(false);
+        problem.transform.GetChild(6).gameObject.SetActive(false);
+        problem.transform.GetChild(7).gameObject.SetActive(false);
+        Debug.Log("Cleaned");
+
+    }
+
+    public void Exit()
+    {
+        OnDisable();
     }
 
 }
