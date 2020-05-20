@@ -22,11 +22,15 @@ public class PlayerDamageReceiver : MonoBehaviour
             curStatus--;
             if (curStatus == 1)
             {
-                Debug.Log("Go To Detention Center");
+                GoToDetCenter();
             }
             UpdateCurrentStatus();
         }
         
+    }
+    private void GoToDetCenter()
+    {
+
     }
     private void UpdateCurrentStatus()
     {
