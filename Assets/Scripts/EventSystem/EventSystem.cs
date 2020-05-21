@@ -49,7 +49,7 @@ public class EventSystem : MonoBehaviour {
         OnExitInteractAreaEvent = 112,
 
         OnPlayerInteractEvent = 114, //format: { actorId: int, interactable_id: int } fired whenever a player presses the 'E' key
-
+        OnPlayerUninteractEvent = 115, //format: { actorId: int } 
         OnPlayerDamageEvent = 116, //format: { actorId: int, interactable_id: int }
 
         OnPlayerDeathEvent = 117, //format: { actorId: int }

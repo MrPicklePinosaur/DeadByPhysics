@@ -119,7 +119,7 @@ public class Two : MonoBehaviour
     }
     public void Exit()
     {
-        generatorUI.OnCloseWindow();
+        eventSystem.RaiseNetworkEvent(EventCodes.OnPlayerUninteractEvent, new object[] { playerProfile.player.ActorNumber });
         this.gameObject.SetActive(false);
     }
 }

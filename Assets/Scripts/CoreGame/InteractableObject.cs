@@ -58,26 +58,37 @@ public abstract class InteractableObject : EventListener {
                 //check to see if player who pressed interact is within interact zone, if so raise successful interaction event
                 //NOTE: this might be a problem if a player is in two interact zones at once, as it will trigger both
                 actorId = (int)payload[0];
-                if (playersInInteractZone.Contains(actorId)) {
+                if (playersInInteractZone.Contains(actorId) && interactingActor == -1) {
 
-
-                    //interactingActor = actorId;
+                    //if no one is interacting, set the current interacting actor
+                    interactingActor = actorId;
 
                     //Raise successful interact event here
                     if (playerProfile.player.ActorNumber == actorId) {
                         OnInteract(actorId);
 
                         Debug.Log($"{actorId} is INTERACTING!! with interactible id {interactable_id}");
+                        
+                    } 
+
+                }
+
+                break;
+
+            case (byte)EventCodes.OnPlayerUninteractEvent:
+                actorId = (int)payload[0];
+                if (interactingActor == actorId) {
+
+                    interactingActor = -1;
+
+                    if (playerProfile.player.ActorNumber == actorId) {
+                        OnUninteract(actorId);
                     }
-
-
-                    
 
                 }
 
                 break;
         }
-    
 
     }
 

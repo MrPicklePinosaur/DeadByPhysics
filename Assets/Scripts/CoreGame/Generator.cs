@@ -26,7 +26,8 @@ public class Generator : InteractableObject {
 
     public override void OnUninteract(int actorId) {
 
-        
+        eventSystem.RaiseNetworkEvent(EventCodes.OnCloseGeneratorWindowEvent, new object[] { interactable_id, actorId });
+
 
     }
 

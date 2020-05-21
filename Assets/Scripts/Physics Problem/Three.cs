@@ -93,7 +93,7 @@ public class Three : MonoBehaviour
 
     public void Exit()
     {
-        generatorUI.OnCloseWindow();
+        eventSystem.RaiseNetworkEvent(EventCodes.OnPlayerUninteractEvent, new object[] { playerProfile.player.ActorNumber });
         canvas.SetActive(false);
     }
 
