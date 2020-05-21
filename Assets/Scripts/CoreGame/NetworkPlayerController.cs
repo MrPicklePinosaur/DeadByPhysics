@@ -76,20 +76,22 @@ public class NetworkPlayerController : EventListener {
 
                 break;
             case (byte)EventCodes.OnPlayerReviveEvent:
-                isTrapped = false;
+                actorId = (int)payload[0];
+                HandleRevive(actorId);
+                Debug.Log($"{actorId} is revived");
 
                 break;
         }
     }
 
     public void HandleDeath(int actorId) {
-        isTrapped = true; //disable movement
 
         //choose prison to place player in
         Prison prison = gameManager.FindOpenPrison();
         prison.SetOccupant(playerProfile.player.ActorNumber);
 
         if (actorId == playerProfile.player.ActorNumber) {
+            isTrapped = true; //disable movement
             //teleport player to prison
             transform.position = prison.trappedPosition.transform.position;
         }
@@ -97,5 +99,14 @@ public class NetworkPlayerController : EventListener {
         //do sm with animation
 
 
+    }
+
+    public void HandleRevive(int actorId) {
+
+        if (actorId == playerProfile.player.ActorNumber) {
+            isTrapped = false;
+        }
+
+        //do sm with animation
     }
 }
