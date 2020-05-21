@@ -5,7 +5,7 @@ using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BalancedCharges : MonoBehaviour
+public class Two : MonoBehaviour
 {
     // Start is called before the first frame update
     public Slider sliderObj;

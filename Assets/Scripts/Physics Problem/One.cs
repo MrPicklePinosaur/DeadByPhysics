@@ -56,11 +56,6 @@ public class One : MonoBehaviour
         Cleanup();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void change_Field()
     {
@@ -102,6 +97,7 @@ public class One : MonoBehaviour
         else
         {
             Debug.Log("Wrong, try again.");
+
             Cleanup();
             OnEnable();
         }
@@ -112,12 +108,14 @@ public class One : MonoBehaviour
         if (Second.transform.GetChild(current_F).gameObject.name == answers[a, 4])
         {
             Debug.Log("Correct");
+
             problem.SetActive(false);
 
         }
         else
         {
             Debug.Log("Wrong, try again");
+
             Cleanup();
             OnEnable();
         }
