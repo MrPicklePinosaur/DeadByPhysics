@@ -40,7 +40,7 @@ public class Three : MonoBehaviour
             float charge = Mathf.Round(Random.Range(-10.0f, 10.0f)*100)/100;
             
             canvas.transform.GetChild(problem).gameObject.transform.GetChild(i).gameObject.GetComponent<TMP_Text>().text = charge.ToString() + "mC";
-            charges.Add(charge / 1000000);
+            charges.Add(charge / 1000);
 
         }
 
@@ -87,6 +87,11 @@ public class Three : MonoBehaviour
                 eventSystem.RaiseNetworkEvent(EventCodes.OnCorrectAnswer, new object[] { generatorUI.curGeneratorId });
                 eventSystem.RaiseNetworkEvent(EventCodes.OnPlayerUninteractEvent, new object[] { playerProfile.player.ActorNumber });
                 Debug.Log("Correct!");
+                
+                Exit();
+            }
+            else
+            {
                 Exit();
             }
         }
