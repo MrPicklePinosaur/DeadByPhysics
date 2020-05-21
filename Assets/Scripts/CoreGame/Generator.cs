@@ -4,6 +4,7 @@ using ExitGames.Client.Photon;
 using UnityEngine;
 
 using static EventSystem;
+using static GameManager;
 
 public class Generator : InteractableObject {
 
@@ -13,6 +14,7 @@ public class Generator : InteractableObject {
         base.Start();
 
         //init order of questions
+        //this part isnt networked, so different clients will have different questions, too bad!
         questions_remaining = new List<int> { 0, 1, 2, 3 };
         questions_remaining.Shuffle();
 
@@ -29,7 +31,6 @@ public class Generator : InteractableObject {
 
         eventSystem.RaiseNetworkEvent(EventCodes.OnCloseGeneratorWindowEvent, new object[] { interactable_id, actorId });
 
-
     }
 
     public override void OnEvent(EventData data) {
@@ -37,6 +38,7 @@ public class Generator : InteractableObject {
 
         object[] payload = (object[])data.CustomData;
         switch (data.Code) {
+
             case (byte)EventCodes.OnCorrectAnswer:
 
                 int gen_id = (int)payload[0];
@@ -50,7 +52,10 @@ public class Generator : InteractableObject {
                     eventSystem.RaiseNetworkEvent(EventCodes.OnSoundEvent, new object[] { "Sounds/correct" }); //use this for everyone
 
                     //check to see if there are no questions left, if so, the gen is done
-
+                    if (questions_remaining.Count == 0) {
+                        Debug.Log($"Generator {interactable_id} is finished!!!!");
+                        gameManager.FinishedGenerator();
+                    }
                 }
                 break;
 

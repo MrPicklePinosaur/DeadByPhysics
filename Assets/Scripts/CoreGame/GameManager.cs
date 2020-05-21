@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour {
     Generator[] generators;
     Prison[] prisons;
 
+    [SerializeField]int generatorsFinished = 0;
+
     void Start() {
         gameManager = this;
 
@@ -35,6 +37,15 @@ public class GameManager : MonoBehaviour {
         return null;
     }
 
+    public void FinishedGenerator() {
+        generatorsFinished += 1;
+
+        if (generatorsFinished >= 4) {
+            //trigger win state
+
+            Debug.Log("WIN YAYYYYYYYYY");
+        }
+    }
 
     
 }

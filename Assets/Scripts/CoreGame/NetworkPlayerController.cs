@@ -8,6 +8,7 @@ using static EventSystem;
 using static PlayerInstance;
 using static GameManager;
 
+using static GeneratorUI;
 using ExitGames.Client.Photon;
 
 [RequireComponent(typeof(PhotonView),typeof(PhotonAnimatorView),typeof(Animator))]
@@ -35,6 +36,13 @@ public class NetworkPlayerController : EventListener {
         //interact
         if (Input.GetKeyDown(KeyCode.E)) {
             eventSystem.RaiseNetworkEvent(EventCodes.OnPlayerInteractEvent, new object[] { playerProfile.player.ActorNumber });
+        }
+
+        //cheat, auto finished question
+        if (Input.GetKeyDown(KeyCode.C)) {
+            if (generatorUI.curGeneratorId != -1) {
+                eventSystem.RaiseNetworkEvent(EventCodes.OnCorrectAnswer, new object[] { generatorUI.curGeneratorId });
+            }
         }
 
 

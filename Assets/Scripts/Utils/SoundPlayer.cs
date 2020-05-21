@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using static EventSystem;
+
 [RequireComponent(typeof(AudioSource))]
 public class SoundPlayer : MonoBehaviour {
 
@@ -50,5 +52,9 @@ public class SoundPlayer : MonoBehaviour {
     }
     public static void quickRandomSound(string audiodir) {
         SoundPlayer.quickRandomSound(audiodir, defaultVolume);
+    }
+
+    public static void quickStartNetworked(string audiodir) {
+        eventSystem.RaiseNetworkEvent(EventCodes.OnSoundEvent, new object[] { audiodir });
     }
 }
