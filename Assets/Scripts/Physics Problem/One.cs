@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using static PlayerProfile;
+using static EventSystem;
+using static GeneratorUI;
 public class One : MonoBehaviour
 {
     int current_Q;
@@ -140,9 +142,8 @@ public class One : MonoBehaviour
 
     }
 
-    public void Exit()
-    {
-
+    public void Exit() {
+        generatorUI.OnCloseWindow();
         problem.SetActive(false);
     }
 

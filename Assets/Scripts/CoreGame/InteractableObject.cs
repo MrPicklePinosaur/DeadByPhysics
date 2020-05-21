@@ -17,8 +17,8 @@ public abstract class InteractableObject : EventListener {
 
     Collider col;
 
-    protected int interactingActor; //the actor that is interacting with the generator at this point (-1 signifies no one interacting)
-    List<int> playersInInteractZone; //players who are within interaction range
+    [SerializeField]protected int interactingActor = -1; //the actor that is interacting with the generator at this point (-1 signifies no one interacting)
+    [SerializeField] List<int> playersInInteractZone; //players who are within interaction range
 
     void Start() {
         base.Start();
@@ -26,7 +26,6 @@ public abstract class InteractableObject : EventListener {
         col = GetComponent<Collider>();
         playersInInteractZone = new List<int>();
 
-        interactingActor = -1;
     }
 
     public override void OnEvent(EventData data) {
@@ -43,16 +42,17 @@ public abstract class InteractableObject : EventListener {
                 if (interact_id != this.interactable_id) { break; }
                 if (!playersInInteractZone.Contains(actorId)) playersInInteractZone.Add(actorId);
                 Debug.Log($"{actorId} entered interactible object number {interactable_id}");
-                break; 
+                break;
 
-            case (byte)EventCodes.OnExitInteractAreaEvent: 
+            case (byte)EventCodes.OnExitInteractAreaEvent:
                 actorId = (int)payload[0];
                 interact_id = (int)payload[1];
 
                 if (interact_id != this.interactable_id) { break; }
                 if (playersInInteractZone.Contains(actorId)) playersInInteractZone.Remove(actorId);
                 Debug.Log($"{actorId} left interactible object number {interactable_id}");
-                break; 
+
+                break;
 
             case (byte)EventCodes.OnPlayerInteractEvent:
                 //check to see if player who pressed interact is within interact zone, if so raise successful interaction event
@@ -60,38 +60,29 @@ public abstract class InteractableObject : EventListener {
                 actorId = (int)payload[0];
                 if (playersInInteractZone.Contains(actorId)) {
 
-                    //if no one is interacting, set the current interacting actor
-                    if (interactingActor == -1) {
-                        interactingActor = actorId;
 
-                        //Raise successful interact event here
-                        if (playerProfile.player.ActorNumber == actorId) {
-                            OnInteract(actorId);
+                    //interactingActor = actorId;
 
-                            Debug.Log($"{actorId} is INTERACTING!! with interactible id {interactable_id}");
-                        }
-                        
-                        
+                    //Raise successful interact event here
+                    if (playerProfile.player.ActorNumber == actorId) {
+                        OnInteract(actorId);
 
-                    } else if (interactingActor == actorId) { //if person who pressed interact key is already interacting, uninteract
-                        interactingActor = -1;
-
-                        //Raise un interact event
-                        if (playerProfile.player.ActorNumber == actorId) {
-                            OnUninteract(actorId);
-                            Debug.Log($"{actorId} stopped INTERACTING!! with interactible id {interactable_id}");
-                        }
-                        
+                        Debug.Log($"{actorId} is INTERACTING!! with interactible id {interactable_id}");
                     }
+
+
+                    
 
                 }
 
                 break;
-            
         }
+    
+
     }
 
     public abstract void OnInteract(int actorId);
+    //TODO, make an alternate onuninteract
     public abstract void OnUninteract(int actorId);
 
     private void OnTriggerEnter(Collider other) {

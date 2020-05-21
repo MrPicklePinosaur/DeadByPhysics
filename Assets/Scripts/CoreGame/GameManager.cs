@@ -6,13 +6,13 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager gameManager;
 
-    InteractableObject[] generators;
+    Generator[] generators;
     Prison[] prisons;
 
     void Start() {
         gameManager = this;
 
-        generators = FindObjectsOfType<InteractableObject>();
+        generators = FindObjectsOfType<Generator>();
         prisons = FindObjectsOfType<Prison>();
     }
 
@@ -21,6 +21,15 @@ public class GameManager : MonoBehaviour {
         foreach(Prison p in prisons) {
             if (p.occupiedBy == -1) {
                 return p;
+            }
+        }
+        return null;
+    }
+
+    public Generator FindGeneratorById(int id) {
+        foreach(Generator g in generators) {
+            if (g.interactable_id == id) {
+                return g;
             }
         }
         return null;

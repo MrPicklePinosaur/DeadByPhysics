@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+using static EventSystem;
+using static PlayerProfile;
+using static GeneratorUI;
 public class Three : MonoBehaviour
 {
     float distance;
@@ -91,6 +93,7 @@ public class Three : MonoBehaviour
 
     public void Exit()
     {
+        generatorUI.OnCloseWindow();
         canvas.SetActive(false);
     }
 

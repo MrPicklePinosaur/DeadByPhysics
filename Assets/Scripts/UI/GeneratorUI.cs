@@ -7,13 +7,19 @@ using UnityEngine;
 using static EventSystem;
 
 using static PlayerProfile;
+using static GameManager;
 
 public class GeneratorUI : EventListener {
 
+    public static GeneratorUI generatorUI;
     public GameObject generatorFrame;
+
+    GameObject openedQuestion;
     
     void Start() {
         base.Start();
+
+        generatorUI = this;
 
     }
 
@@ -30,8 +36,7 @@ public class GeneratorUI : EventListener {
                 if (targetActor == playerProfile.player.ActorNumber) {
                     int generatorId = (int)payload[0];
 
-                    //pull the right questions and display it
-                    generatorFrame.SetActive(true);
+                    OnOpenWindow(generatorId);
                 }
 
                 break;
@@ -41,14 +46,31 @@ public class GeneratorUI : EventListener {
 
                 if (targetActor == playerProfile.player.ActorNumber) {
 
-                    //close generator window
-                    generatorFrame.SetActive(false);
+                    OnCloseWindow();
                 }
 
                 break;
         }
     }
 
-    
+    void OnOpenWindow(int interactable_id) {
+        //pull the right questions and display it
+        generatorFrame.SetActive(true);
+
+        Generator cur_gen = gameManager.FindGeneratorById(interactable_id);
+        int question = cur_gen.questions_remaining[0];
+
+        generatorFrame.transform.GetChild(question).gameObject.SetActive(true);
+
+
+    }
+
+    public void OnCloseWindow() {
+        
+
+        //close generator window
+        generatorFrame.SetActive(false);
+    }
+
 
 }

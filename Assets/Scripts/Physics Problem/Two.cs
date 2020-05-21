@@ -5,6 +5,9 @@ using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 
+using static EventSystem;
+using static PlayerProfile;
+using static GeneratorUI;
 public class Two : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -116,6 +119,7 @@ public class Two : MonoBehaviour
     }
     public void Exit()
     {
+        generatorUI.OnCloseWindow();
         this.gameObject.SetActive(false);
     }
 }

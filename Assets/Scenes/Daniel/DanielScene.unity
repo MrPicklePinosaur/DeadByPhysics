@@ -161,7 +161,7 @@ RectTransform:
   - {fileID: 2114738177}
   - {fileID: 745081494}
   m_Father: {fileID: 837304043}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1999,7 +1999,7 @@ RectTransform:
   - {fileID: 982338108}
   - {fileID: 479357343}
   m_Father: {fileID: 837304043}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2546,7 +2546,7 @@ RectTransform:
   - {fileID: 854135921}
   - {fileID: 378083448}
   m_Father: {fileID: 837304043}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4732,7 +4732,7 @@ RectTransform:
   m_Children:
   - {fileID: 1024411399}
   m_Father: {fileID: 837304043}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4797,7 +4797,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!1 &832712249
 GameObject:
@@ -4900,14 +4900,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 837304042}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 424.26733, y: 236.82315, z: 200.85107}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 789444047}
   - {fileID: 219732584}
   - {fileID: 2023158968}
   - {fileID: 2332721}
   - {fileID: 426019107}
+  - {fileID: 789444047}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9147,6 +9147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactable_id: 1
+  questions_remaining: 
 --- !u!135 &1513361581
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -11702,7 +11703,7 @@ RectTransform:
   - {fileID: 884033793}
   - {fileID: 1399799727}
   m_Father: {fileID: 837304043}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -12328,6 +12329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactable_id: 0
+  questions_remaining: 
 --- !u!1 &2128314010
 GameObject:
   m_ObjectHideFlags: 0

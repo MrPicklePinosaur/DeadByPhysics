@@ -48,7 +48,8 @@ public class EventSystem : MonoBehaviour {
         OnEnterInteractAreaEvent = 111, //used to display an 'E' icon whenever player can interact with sm
         OnExitInteractAreaEvent = 112,
 
-        OnPlayerInteractEvent = 115, //format: { actorId: int, interactable_id: int } fired whenever a player presses the 'E' key
+        OnPlayerInteractEvent = 114, //format: { actorId: int, interactable_id: int } fired whenever a player presses the 'E' key
+
         OnPlayerDamageEvent = 116, //format: { actorId: int, interactable_id: int }
 
         OnPlayerDeathEvent = 117, //format: { actorId: int }
