@@ -362,6 +362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 242ab45ca5521c14aaef10bced50aae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactable_id: 10
   occupiedBy: -1
   trappedPosition: {fileID: 15944046}
 --- !u!23 &433606839
@@ -1865,10 +1866,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1513361578}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd3677257217aa4c8bd410da04504da, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f9805fc0aafe8e4186bb73131d70b29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generatorId: 1
+  interactable_id: 1
 --- !u!135 &1513361581
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2685,10 +2686,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2122936507}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd3677257217aa4c8bd410da04504da, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f9805fc0aafe8e4186bb73131d70b29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generatorId: 0
+  interactable_id: 0
 --- !u!114 &8545629829131346116
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,13 +6,13 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager gameManager;
 
-    Generator[] generators;
+    InteractableObject[] generators;
     Prison[] prisons;
 
     void Start() {
         gameManager = this;
 
-        generators = FindObjectsOfType<Generator>();
+        generators = FindObjectsOfType<InteractableObject>();
         prisons = FindObjectsOfType<Prison>();
     }
 

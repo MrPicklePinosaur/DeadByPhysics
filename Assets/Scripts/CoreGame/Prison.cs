@@ -3,27 +3,28 @@ using System.Collections.Generic;
 using ExitGames.Client.Photon;
 using UnityEngine;
 
-
+using static EventSystem;
 //make collider on this gameobject the saving radius
 [RequireComponent(typeof(Collider))]
-public class Prison : EventListener {
+public class Prison : InteractableObject {
 
     public int occupiedBy = -1; //the player that is in the prison
     public GameObject trappedPosition;
 
-    int interactingActor;
-    List<int> playersInInteractZone;
+    public override void OnInteract(int actorId) {
 
-    private void Start() {
-        base.Start();
+        if (occupiedBy == -1) { return; } //do nothing if there is no one worth saving
+        Debug.Log($"actor {actorId} is Saving friend {occupiedBy}");
 
-        playersInInteractZone = new List<int>();
+        eventSystem.RaiseNetworkEvent(EventCodes.OnPlayerReviveEvent, new object[] { occupiedBy });
+        RemoveOccupant();
 
-        interactingActor = -1;
+        interactingActor = -1; //lmao xdd (makes it so this event is not toggleable like the generator)
+
     }
 
-    public override void OnEvent(EventData data) {
-        
+    public override void OnUninteract(int actorId) {
+
     }
 
     public void SetOccupant(int actorId) { this.occupiedBy = actorId; }
