@@ -37,7 +37,6 @@ public class BalancedCharges : MonoBehaviour
             if (val <= sliderObj.maxValue && val >= sliderObj.minValue)
             {
                 sliderObj.value = val;
-                Debug.Log(val);
             }
         }
     }
@@ -46,7 +45,7 @@ public class BalancedCharges : MonoBehaviour
         float leftCharge =(float) Math.Round((double)UnityEngine.Random.Range(-1f,1f),4);
         float ans = (float)Math.Round((double)UnityEngine.Random.Range(-800f, 1800f), 4);
         float rightCharge =(float) Math.Round((double)UnityEngine.Random.Range(-1f,1f),4);
-        if((leftCharge>0 && rightCharge > 0) || (leftCharge<=0 && rightCharge<=0))
+        if(ans>=0 && ans<=1000)
         {
             rightCharge = leftCharge * Mathf.Pow((1000 - ans), 2) / Mathf.Pow(ans, 2);
         }
@@ -75,11 +74,25 @@ public class BalancedCharges : MonoBehaviour
             lHolder.transform.Find("positive").gameObject.SetActive(false);
             lHolder.transform.Find("negative").gameObject.SetActive(true);
         }
+        if((rightCharge>=0 && leftCharge >= 0)||(rightCharge<=0 && leftCharge<=0))
+        {
+            float squareRoot = Mathf.Sqrt(Mathf.Abs(leftCharge) / Mathf.Abs(rightCharge));
+            ans = (1000 * squareRoot) / (1 + squareRoot);
+        }
+        else if (Mathf.Abs(rightCharge) > Mathf.Abs(leftCharge))
+        {
+            float squareRoot = Mathf.Sqrt(Mathf.Abs(leftCharge) / Mathf.Abs(rightCharge));
+            ans = -(1000 * squareRoot) / (1 - squareRoot);
+        }
+        else
+        {
+            float squareRoot = Mathf.Sqrt(Mathf.Abs(leftCharge) / Mathf.Abs(rightCharge));
+            ans = (1000 * squareRoot) / (squareRoot - 1);
+        }
         rText.text = rightCharge.ToString() + " C";
         lText.text = leftCharge.ToString() + " C";
         Debug.Log(ans);
-        Debug.Log(leftCharge);
-        Debug.Log(rightCharge);
+
         ansProp = ans;
     }
     public void submitAns()
