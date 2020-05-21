@@ -19,6 +19,7 @@ public class NetworkPlayerController : EventListener {
     public float moveSpeed;
 
     public bool isTrapped;
+    public GameObject cam;
 
     void Start() {
         base.Start();
@@ -27,6 +28,11 @@ public class NetworkPlayerController : EventListener {
         anim = GetComponent<Animator>();
 
         isTrapped = false;
+
+        if (!view.IsMine) {
+            cam.GetComponent<Camera>().enabled = false;
+        }
+
     }
 
     void Update() {

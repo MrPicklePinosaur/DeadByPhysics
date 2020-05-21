@@ -9,15 +9,14 @@ public class ThirdPersonCameraController : MonoBehaviour
     public float RotationSpeed = 1;
     public Transform Target, Player;
     float mouseX, mouseY;
-
-    public PhotonView view;
     
     void Start()
     {
+
+        Target = transform.parent;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        view = GetComponentInParent<PhotonView>();
     }
     void LateUpdate()
     {
@@ -25,7 +24,7 @@ public class ThirdPersonCameraController : MonoBehaviour
     }
     void CamControl()
     {
-        if (!view.IsMine) return; 
+
         mouseX += Input.GetAxis("Mouse X") * RotationSpeed;
         mouseY -= Input.GetAxis("Mouse Y") * RotationSpeed;
         mouseY = Mathf.Clamp(mouseY, -65,20);

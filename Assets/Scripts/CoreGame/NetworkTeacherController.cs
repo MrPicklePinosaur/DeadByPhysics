@@ -13,9 +13,16 @@ public class NetworkTeacherController : MonoBehaviour {
 
     bool isAttacking;
 
+    public GameObject cam;
+
     private void Start() {
         view = GetComponent<PhotonView>();
         anim = GetComponent<Animator>();
+
+        if (!view.IsMine) {
+            cam.GetComponentInChildren<Camera>().enabled = false;
+        }
+
     }
     //called from animation event
     private void stopAttacking() {
