@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using static EventSystem;
 public class GameManager : MonoBehaviour {
 
     public static GameManager gameManager;
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour {
             //trigger win state
 
             Debug.Log("WIN YAYYYYYYYYY");
+            eventSystem.RaiseNetworkEvent(EventCodes.OnSoundEvent, new object[] { "Sounds/win" });
         }
     }
 

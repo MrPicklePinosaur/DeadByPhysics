@@ -96,7 +96,7 @@ public class NetworkPlayerController : EventListener {
 
         //choose prison to place player in
         Prison prison = gameManager.FindOpenPrison();
-        prison.SetOccupant(playerProfile.player.ActorNumber);
+        prison.SetOccupant(actorId);
 
         if (actorId == playerProfile.player.ActorNumber) {
             isTrapped = true; //disable movement

@@ -41,7 +41,7 @@ public abstract class InteractableObject : EventListener {
 
                 if (interact_id != this.interactable_id) { break; }
                 if (!playersInInteractZone.Contains(actorId)) playersInInteractZone.Add(actorId);
-                Debug.Log($"{actorId} entered interactible object number {interactable_id}");
+                //Debug.Log($"{actorId} entered interactible object number {interactable_id}");
                 break;
 
             case (byte)EventCodes.OnExitInteractAreaEvent:
@@ -50,7 +50,7 @@ public abstract class InteractableObject : EventListener {
 
                 if (interact_id != this.interactable_id) { break; }
                 if (playersInInteractZone.Contains(actorId)) playersInInteractZone.Remove(actorId);
-                Debug.Log($"{actorId} left interactible object number {interactable_id}");
+                //Debug.Log($"{actorId} left interactible object number {interactable_id}");
 
                 break;
 
