@@ -61,6 +61,8 @@ public class EventSystem : MonoBehaviour {
         OnCorrectAnswer = 130, //format: { interactable_id: int }
         OnWrongAnswer = 131,//format: { interactable_id: int }
 
+        OnSoundEvent = 140, //format: { sound_name: string }
+
         //Photon codes: 200-255 (https://doc-api.photonengine.com/en/pun/v2/class_photon_1_1_realtime_1_1_event_code.html)
         AzureNodeInfoEvent = 210,
 

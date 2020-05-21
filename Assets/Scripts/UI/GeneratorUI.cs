@@ -55,7 +55,7 @@ public class GeneratorUI : EventListener {
     }
 
     void OnOpenWindow(int interactable_id) {
-
+        //NOTE: for some reasons gens questions arent synced between clients, fix laterz
         curGeneratorId = interactable_id;
         //pull the right questions and display it
         generatorFrame.SetActive(true);

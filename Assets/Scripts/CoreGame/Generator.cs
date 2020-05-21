@@ -45,6 +45,10 @@ public class Generator : InteractableObject {
                     Debug.Log($"finished question {questions_remaining[0]}!!");
                     questions_remaining.RemoveAt(0);
 
+                    //play a sound lmao
+                    //SoundPlayer.quickStart("Sounds/correct"); //use this for client only
+                    eventSystem.RaiseNetworkEvent(EventCodes.OnSoundEvent, new object[] { "Sounds/correct" }); //use this for everyone
+
                     //check to see if there are no questions left, if so, the gen is done
 
                 }
