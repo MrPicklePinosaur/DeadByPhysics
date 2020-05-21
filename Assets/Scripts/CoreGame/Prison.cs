@@ -17,7 +17,7 @@ public class Prison : InteractableObject {
         Debug.Log($"actor {actorId} is Saving friend {occupiedBy}");
 
         eventSystem.RaiseNetworkEvent(EventCodes.OnPlayerReviveEvent, new object[] { occupiedBy });
-        RemoveOccupant();
+        //RemoveOccupant();
 
         interactingActor = -1; //lmao xdd (makes it so this event is not toggleable like the generator)
 

@@ -49,5 +49,14 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public Prison FindPrisonByOccupant(int actorId) {
+        foreach(Prison p in prisons) {
+            if (p.occupiedBy == actorId) {
+                return p;
+            }
+        }
+        return null;
+    }
+
     
 }

@@ -13,6 +13,7 @@ public class DamageCollider : MonoBehaviour {
         anim = GetComponentInParent<Animator>();
     }
 
+
     private void OnTriggerEnter(Collider other) {
 
         NetworkPlayerController cont = other.gameObject.GetComponent<NetworkPlayerController>();

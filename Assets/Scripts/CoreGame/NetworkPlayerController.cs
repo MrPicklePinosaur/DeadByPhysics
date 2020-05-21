@@ -88,6 +88,12 @@ public class NetworkPlayerController : EventListener {
                 HandleRevive(actorId);
                 Debug.Log($"{actorId} is revived");
 
+                if (actorId == playerProfile.player.ActorNumber) {
+
+                    eventSystem.RaiseNetworkEvent(EventCodes.OnPlayerStatusChange, new object[] { actorId, PlayerStatus.Excellent });
+                }
+                
+
                 break;
         }
     }
@@ -110,6 +116,9 @@ public class NetworkPlayerController : EventListener {
     }
 
     public void HandleRevive(int actorId) {
+
+        Prison prison = gameManager.FindPrisonByOccupant(actorId);
+        prison.RemoveOccupant();
 
         if (actorId == playerProfile.player.ActorNumber) {
             isTrapped = false;

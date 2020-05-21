@@ -103,6 +103,13 @@ public class PlayerInstance : EventListener {
                 break;
 
             //handle player disconnect, send message out to update status to disconnected
+            case (byte)EventCodes.OnPlayerReviveEvent:
+                actorId = (int)payload[0];
+
+                if (actorId == playerProfile.player.ActorNumber) {
+                    playerStatus = PlayerStatus.Excellent;
+                } 
+                break;
 
 
 
