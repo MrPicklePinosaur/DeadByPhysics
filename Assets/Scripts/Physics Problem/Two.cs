@@ -102,6 +102,8 @@ public class Two : MonoBehaviour
     {
         if (String.Equals(ansProp.ToString("0.0"), txtObj.text))
         {
+            eventSystem.RaiseNetworkEvent(EventCodes.OnCorrectAnswer, new object[] { generatorUI.curGeneratorId });
+            eventSystem.RaiseNetworkEvent(EventCodes.OnPlayerUninteractEvent, new object[] { playerProfile.player.ActorNumber });
             Debug.Log("correct");
             correct += 1;
             Exit();

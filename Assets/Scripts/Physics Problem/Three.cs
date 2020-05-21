@@ -84,6 +84,8 @@ public class Three : MonoBehaviour
             inp = float.Parse(textfield.GetComponent<TMP_InputField>().text);
             if (inp == answer)
             {
+                eventSystem.RaiseNetworkEvent(EventCodes.OnCorrectAnswer, new object[] { generatorUI.curGeneratorId });
+                eventSystem.RaiseNetworkEvent(EventCodes.OnPlayerUninteractEvent, new object[] { playerProfile.player.ActorNumber });
                 Debug.Log("Correct!");
                 Exit();
             }

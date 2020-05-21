@@ -52,6 +52,8 @@ public class Four : MonoBehaviour
         {
             if (inp == answer)
             {
+                eventSystem.RaiseNetworkEvent(EventCodes.OnCorrectAnswer, new object[] { generatorUI.curGeneratorId });
+                eventSystem.RaiseNetworkEvent(EventCodes.OnPlayerUninteractEvent, new object[] { playerProfile.player.ActorNumber });
                 Debug.Log("Correct!");
                 Exit();
             }

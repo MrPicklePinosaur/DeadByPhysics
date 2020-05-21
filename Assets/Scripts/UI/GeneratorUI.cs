@@ -14,7 +14,7 @@ public class GeneratorUI : EventListener {
     public static GeneratorUI generatorUI;
     public GameObject generatorFrame;
 
-    GameObject openedQuestion;
+    public int curGeneratorId; //keep track of which generator the player is using
     
     void Start() {
         base.Start();
@@ -50,10 +50,13 @@ public class GeneratorUI : EventListener {
                 }
 
                 break;
+
         }
     }
 
     void OnOpenWindow(int interactable_id) {
+
+        curGeneratorId = interactable_id;
         //pull the right questions and display it
         generatorFrame.SetActive(true);
 
@@ -62,15 +65,16 @@ public class GeneratorUI : EventListener {
 
         generatorFrame.transform.GetChild(question).gameObject.SetActive(true);
 
-
     }
 
     public void OnCloseWindow() {
-        
+
+        curGeneratorId = -1;
 
         //close generator window
         generatorFrame.SetActive(false);
     }
+
 
 
 }

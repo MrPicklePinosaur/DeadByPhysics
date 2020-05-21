@@ -109,6 +109,8 @@ public class One : MonoBehaviour
     {
         if (Second.transform.GetChild(current_F).gameObject.name == answers[a, 4])
         {
+            eventSystem.RaiseNetworkEvent(EventCodes.OnCorrectAnswer, new object[] { generatorUI.curGeneratorId });
+            eventSystem.RaiseNetworkEvent(EventCodes.OnPlayerUninteractEvent, new object[] { playerProfile.player.ActorNumber });
             Debug.Log("Correct");
 
             problem.SetActive(false);
