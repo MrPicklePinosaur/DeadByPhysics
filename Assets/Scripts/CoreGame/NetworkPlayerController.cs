@@ -62,7 +62,8 @@ public class NetworkPlayerController : EventListener {
 
         Vector2 inp = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
         Vector3 move = new Vector3(inp.x, 0, inp.y) * moveSpeed * sprintMult;
-        transform.position += move * Time.deltaTime;
+        //transform.position += move * Time.deltaTime;
+        transform.Translate(move * Time.deltaTime, Space.Self);
 
         //animation stuff
         anim.SetFloat("Forward/Backward Speed", move.z);
