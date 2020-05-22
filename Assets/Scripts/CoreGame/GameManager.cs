@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
 
     Generator[] generators;
     Prison[] prisons;
+    Spawnpoint[] spawnpoints;
 
     [SerializeField]int generatorsFinished = 0;
 
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour {
 
         generators = FindObjectsOfType<Generator>();
         prisons = FindObjectsOfType<Prison>();
+        spawnpoints = FindObjectsOfType<Spawnpoint>();
     }
 
 
@@ -53,6 +55,15 @@ public class GameManager : MonoBehaviour {
         foreach(Prison p in prisons) {
             if (p.occupiedBy == actorId) {
                 return p;
+            }
+        }
+        return null;
+    }
+
+    public Spawnpoint FindSpawnpointById(int id) {
+        foreach (Spawnpoint s in spawnpoints) {
+            if (s.spawnpoint_id == id) {
+                return s;
             }
         }
         return null;

@@ -55,8 +55,8 @@ public class EventSystem : MonoBehaviour {
         OnPlayerDeathEvent = 117, //format: { actorId: int }
         OnPlayerReviveEvent = 118, //format: { actorId: int }
 
-        OnStudentInitEvent = 120, //format: { actorId: int }
-        OnTeacherInitEvent = 121, //format: { actorId: int }
+        OnStudentInitEvent = 120, //format: { actorId: int, spawn_id: int }
+        OnTeacherInitEvent = 121, //format: { actorId: int, spawn_id: int }
 
         OnCorrectAnswer = 130, //format: { interactable_id: int }
         OnWrongAnswer = 131,//format: { interactable_id: int }

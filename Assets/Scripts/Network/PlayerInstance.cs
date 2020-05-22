@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static EventSystem;
 using static PlayerProfile;
+using static GameManager;
 
 public enum PlayerStatus {
     Excellent,
@@ -39,29 +40,38 @@ public class PlayerInstance : EventListener {
                 if (i == teacherInd) continue;
 
                 //tell player to init
-                eventSystem.RaiseNetworkEvent(EventCodes.OnStudentInitEvent, new object[] { playerList[i].ActorNumber });
+                eventSystem.RaiseNetworkEvent(EventCodes.OnStudentInitEvent, new object[] { playerList[i].ActorNumber, i });
+
+                //teleport player
             }
             //tell teacher to init
-            eventSystem.RaiseNetworkEvent(EventCodes.OnTeacherInitEvent, new object[] { playerList[teacherInd].ActorNumber });
+            eventSystem.RaiseNetworkEvent(EventCodes.OnTeacherInitEvent, new object[] { playerList[teacherInd].ActorNumber, 4 });
         }
 
     }
 
-    public void InitStudent() {
-        Debug.Log("Initing student");
-        clientAvatar = PhotonNetwork.Instantiate("Players/Student", Vector3.zero, Quaternion.identity);
+    public void InitStudent(int spawnId) {
+        
+        Vector3 spawnPos = gameManager.FindSpawnpointById(spawnId).transform.position;
+        Debug.Log($"Initing student at {spawnPos}");
+        clientAvatar = PhotonNetwork.Instantiate("Players/Student", spawnPos, Quaternion.identity);
         playerStatus = PlayerStatus.Excellent;
         isTeacher = false;
 
+        //teleport player to spawn
+        
+
     }
 
-    public void InitTeacher() {
-        Debug.Log("Initing teacher");
+    public void InitTeacher(int spawnId) {
+        
         //init teacher
-
-        clientAvatar = PhotonNetwork.Instantiate("Players/Teacher", Vector3.zero, Quaternion.identity);
+        Vector3 spawnPos = gameManager.FindSpawnpointById(spawnId).transform.position;
+        Debug.Log($"Initing teacher at {spawnPos}");
+        clientAvatar = PhotonNetwork.Instantiate("Players/Teacher", spawnPos, Quaternion.identity);
         //not playerstatus is not inited for teacher
         isTeacher = true;
+
 
     }
 
@@ -73,9 +83,10 @@ public class PlayerInstance : EventListener {
             //init student
             case (byte)EventCodes.OnStudentInitEvent:
                 int actorId = (int)payload[0];
+                int spawnId = (int)payload[1];
 
                 if (actorId == playerProfile.player.ActorNumber) {
-                    InitStudent();
+                    InitStudent(spawnId);
                 }
 
                 break;
@@ -83,9 +94,10 @@ public class PlayerInstance : EventListener {
             case (byte)EventCodes.OnTeacherInitEvent:
 
                 actorId = (int)payload[0];
+                spawnId = (int)payload[1];
 
                 if (actorId == playerProfile.player.ActorNumber) {
-                    InitTeacher();
+                    InitTeacher(spawnId);
                 }
 
                 break;
