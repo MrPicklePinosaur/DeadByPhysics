@@ -206,7 +206,7 @@ Transform:
   - {fileID: 3979931657437090469}
   - {fileID: 7387517239249409779}
   - {fileID: 7498862688224809213}
-  - {fileID: 8992440528215502935}
+  - {fileID: 8362373795642082595}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 151.55301, z: 0}
@@ -274,7 +274,7 @@ MonoBehaviour:
   view: {fileID: 0}
   moveSpeed: 2
   isTrapped: 0
-  cam: {fileID: 396418919189098885}
+  cam: {fileID: 8362373795642082648}
 --- !u!114 &1959245007118676105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -956,13 +956,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80ea0d1fb22ffce498474443d3dd8451, type: 3}
---- !u!4 &8992440528215502935 stripped
+--- !u!4 &8362373795642082595 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 632350772567504306, guid: 80ea0d1fb22ffce498474443d3dd8451,
     type: 3}
   m_PrefabInstance: {fileID: 8362373795642082789}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &396418919189098885 stripped
+--- !u!1 &8362373795642082648 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8182268946230719584, guid: 80ea0d1fb22ffce498474443d3dd8451,
     type: 3}

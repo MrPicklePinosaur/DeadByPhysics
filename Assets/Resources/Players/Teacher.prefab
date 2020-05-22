@@ -534,7 +534,7 @@ Transform:
   - {fileID: 5274957613956320362}
   - {fileID: 5274957614889978589}
   - {fileID: 5274957615931110329}
-  - {fileID: 8464338221283488176}
+  - {fileID: 9057250575829779652}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -684,7 +684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  cam: {fileID: 589838739098927728}
+  cam: {fileID: 9057250575829779648}
 --- !u!1 &5274957614307345377
 GameObject:
   m_ObjectHideFlags: 0
@@ -4112,13 +4112,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80ea0d1fb22ffce498474443d3dd8451, type: 3}
---- !u!1 &589838739098927728 stripped
+--- !u!1 &9057250575829779648 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8475306502042207858, guid: 80ea0d1fb22ffce498474443d3dd8451,
     type: 3}
   m_PrefabInstance: {fileID: 9057250575829779458}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &8464338221283488176 stripped
+--- !u!4 &9057250575829779652 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 632350772567504306, guid: 80ea0d1fb22ffce498474443d3dd8451,
     type: 3}

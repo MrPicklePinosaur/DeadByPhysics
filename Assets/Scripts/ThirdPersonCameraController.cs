@@ -14,8 +14,8 @@ public class ThirdPersonCameraController : MonoBehaviour
     {
 
         Target = transform.parent;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
 
     }
     void LateUpdate()
